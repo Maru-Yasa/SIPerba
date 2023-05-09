@@ -41,7 +41,7 @@
         </div>
         <div class="bg-base-100 rounded-lg shadow-lg p-3 h-96 w-full md:w-full lg:w-fit overflow-x-auto overflow-y-auto">
             <div class="">
-                <table class="table table-zebra ">
+                <table class="table table-zebra">
                     <thead>
                         <tr>
                             <th></th>
@@ -69,6 +69,7 @@
                                 <td><?= $history->hasil ?></td>
                                 <td><?= $history->date ?></td>
                             </tr>
+						<?php $no++ ?>	
                         <?php endforeach; ?>
                     </tbody>
                     <!-- jangan di hapus -->
