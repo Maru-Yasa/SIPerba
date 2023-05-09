@@ -9,6 +9,7 @@ class Home extends CI_Controller
     }
     public function hitung()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $this->form_validation->set_rules('balok', 'Balok', 'required');
         $this->form_validation->set_rules('tinggi', 'Tinggi', 'required');
         $this->form_validation->set_rules('luas', 'Luas', 'required');
@@ -23,10 +24,14 @@ class Home extends CI_Controller
             $as = htmlspecialchars($this->input->post('luas'));
             $fc = htmlspecialchars($this->input->post('kekuatan'));
             $fy = htmlspecialchars($this->input->post('mutu'));
-
             $query = $this->M_process->hitung($b, $d, $as, $fc, $fy);
             $this->session->set_flashdata('hasil', $query);
             redirect('/');
         }
+    }
+    public function history()
+    {
+        $data['riwayat'] = $this->M_process->getHistory();
+        $this->load->view('home/history', $data);
     }
 }

@@ -85,6 +85,24 @@ class M_process extends CI_Model
             $hasil = $p . " < " . $pMin2 . "<br>salah";
             // return $hasil;
         }
+        if ($Mn == null) {
+            $Mn = "-";
+        }
+        $data = [
+            'b' => $b,
+            'd' => $d,
+            'as2' => $as,
+            'fy' => $fy,
+            'fc' => $fc,
+            'hasil' => $Mn,
+            'date' => date("Y-m-d")
+        ];
+        $this->db->insert('history', $data);
         return $hasil;
+    }
+    public function getHistory()
+    {
+        $query = $this->db->get('history')->result();
+        return $query;
     }
 }

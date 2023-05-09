@@ -29,8 +29,8 @@
         </div>
         <div class="navbar-end hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
-                <li><a href="/">Kalkulator</a></li>
-                <li><a href="/history.html">Histori</a></li>
+                <li><a href="<?= base_url('') ?>">Kalkulator</a></li>
+                <li><a href="<?= base_url('home/history') ?>">Histori</a></li>
             </ul>
         </div>
     </div>
