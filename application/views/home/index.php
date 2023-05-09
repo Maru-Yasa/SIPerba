@@ -21,8 +21,8 @@
                     </svg>
                 </label>
                 <ul tabindex="0" class="text-primary menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="/">Kalkulator</a></li>
-                    <li><a href="/history.html">Histori</a></li>
+                    <li><a href="<?= base_url('') ?>">Kalkulator</a></li>
+                    <li><a href="<?= base_url('home/history') ?>">Histori</a></li>
                 </ul>
             </div>
             <a class="btn btn-ghost normal-case text-xl">Kalkulator LRFD</a>
