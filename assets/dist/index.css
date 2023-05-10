@@ -3,3 +3,10 @@
 body {
     font-family: 'Poppins', sans-serif;
 }
+
+br {
+	display: block;
+	margin: 15px 0;
+	line-height: 15px;
+	content: " ";
+}

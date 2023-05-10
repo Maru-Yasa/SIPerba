@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?= base_url() ?>/assets/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="<?= base_url() ?>/assets/dist/tailwind.css"></script>
-    <link rel="stylesheet" href="<?= base_url() ?>/assets/dist/index.css">
+    <link href="/assets/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/dist/tailwind.css"></script>
+    <link rel="stylesheet" href="/assets/dist/index.css">
     <title>APLIKASI PERHITUNGAN BALOK BANGUNAN BETON MENGGUNAKAN METODE LRFD</title>
 </head>
 
@@ -25,7 +25,7 @@
                     <li><a href="<?= base_url('home/history') ?>">Histori</a></li>
                 </ul>
             </div>
-            <a class="btn btn-ghost normal-case text-xl">Kalkulator LRFD</a>
+            <a class="btn btn-ghost normal-case text-xl">Perhitungan Bangunan Balok</a>
         </div>
         <div class="navbar-end hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
@@ -45,11 +45,11 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="normal-case">$b (inch)$</th>
-                            <th class="normal-case">$d (inch)$</th>
-                            <th class="normal-case">$As (inch^2)$</th>
-                            <th class="normal-case">$Fy (psi)$</th>
-                            <th class="normal-case">$f'c (psi)$</th>
+                            <th class="normal-case">$b$ $(mm)$</th>
+                            <th class="normal-case">$d$ $(mm)$</th>
+                            <th class="normal-case">$A_s$ $(mm^2)$</th>
+                            <th class="normal-case">$f_y$ $(Mpa)$</th>
+                            <th class="normal-case">$f'c$ $(Mpa)$</th>
                             <th class="normal-case">$M_n$</th>
                             <th class="normal-case">Tanggal</th>
                         </tr>
@@ -99,7 +99,7 @@
             }
         };
     </script>
-    <script id="MathJax-script" async src="<?= base_url() ?>/assets/dist/tex-chtml.js">
+    <script id="MathJax-script" async src="/assets/dist/tex-chtml.js">
     </script>
 </body>
 
