@@ -148,7 +148,7 @@ class M_process extends CI_Model
 	
 				// c = a / beta
 				// var_dump([round($a, 2), $konstantaB]);
-				$c = $a / $konstantaB;
+				$c = round($a / $konstantaB, 2);
 	
 				// c/dt = c / d
 				// var_dump([$c, round($c, 2), $input['d']]);
@@ -161,7 +161,11 @@ class M_process extends CI_Model
 							'status' => true,
 							'data' => $Mn,
 							'input' => [
-								'a' => $a
+								'a' => $a,
+								'beta' => $konstantaB,	
+								'c' => $c,
+								'et' => $et,
+								'beta' => $konstantaB
 							] 
 						];                    
 						// return $hasil;
@@ -183,9 +187,13 @@ class M_process extends CI_Model
 							'status' => true,
 							'data' => $Mn,
 							'input' => [
-								'a' => $a
+								'a' => $a,
+								'beta' => $konstantaB,	
+								'c' => $c,
+								'cdt' => $cdt,
+								'beta' => $konstantaB
 							] 
-						];
+						]; 
 						// return $hasil;
 					} else {
 						$hasil = [
