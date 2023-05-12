@@ -106,8 +106,8 @@ class M_process extends CI_Model
 
 		$hasil = [];
 		try {
-			// f'c^1/3 / fy
-			$pMin1 = pow($input["f'c"], 1 / 3);
+			// 3 * f'c^1/2 / fy
+			$pMin1 = 3 * pow($input["f'c"], 1/2) / $input["fy"];
 	
 			// 200/fy
 			$pMin2 = 200 / $input["fy"];
@@ -117,7 +117,7 @@ class M_process extends CI_Model
 			$Mn = 0;
 	
 			// var_dump([$p, $pMin2]);
-			if ($p > $pMin2) {
+			if ($p > $pMin1) {
 				// print_r($p." > ".$pMin2."\n");
 				// print_r("Benar");
 				$konstantaB = 0;
@@ -152,37 +152,14 @@ class M_process extends CI_Model
 				$c = round($a / $konstantaB, 2);
 	
 				// c/dt = c / d
-				// var_dump([$c, round($c, 2), $input['d']]);
-				// implementasi contoh c
-				if ($input["f'c"] > 8000) {
-					$et = 0.003 * round(($input['d'] - $c) / $c, 2);
+				$cdt = $c / $input['d'];
+
+				if ($cdt <= 0.375) {
+					// ketika memenuhi syarat c/dt <= 0.375
+					$et = 0.003 * (($input['d'] - $c) / $c);
 					if ($et > 0.005) {
-						$Mn = round($input['as'] * $input['fy'] * ($input["d"] - $a / 2));
-						$hasil = [
-							'status' => true,
-							'data' => $Mn,
-							'input' => [
-								'a' => $a,
-								'beta' => $konstantaB,	
-								'c' => $c,
-								'et' => $et,
-								'beta' => $konstantaB
-							] 
-						];                  
-						// return $hasil;
-					} else {
-						$hasil = [
-							'status' => false,
-							'data' => "Balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318"
-						];
-						// return $hasil;
-					}
-					// implementasi contoh a & b
-				} else {
-					$cdt = $c / $input['d'];
-	
-					// $cdt > 0.375 < 0.60
-					if ($cdt < 0.60 && $cdt > 0.375) {
+						// ketika memenuhi syarat et > 0.005
+						// menghitung Mn
 						$Mn = round($input['as'] * $input['fy'] * ($input["d"] - $a / 2));
 						$hasil = [
 							'status' => true,
@@ -192,23 +169,68 @@ class M_process extends CI_Model
 								'beta' => $konstantaB,	
 								'c' => $c,
 								'cdt' => $cdt,
-								'beta' => $konstantaB
+								'et' => $et,
+								'beta' => $konstantaB,
+								'pMin1' => $pMin1,
+								'p' => $p,
+								'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $'.$p.' > '.$pMin1.'$ Diterima',
+								'perbandinganEt' => 'Syarat atau ketentuan $ε_t > 0.005$ = $'.$et.' > 0.005$ Diterima',
+								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $'.$cdt.' <= 0.375$ Diterima'
 							] 
 						]; 
-						// return $hasil;
 					} else {
+						// ketika TIDAK memenuhi syarat et > 0.005
 						$hasil = [
 							'status' => false,
-							'data' => "Balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318"
-						];
-						// return $hasil;
+							'data' => 'Syarat atau ketentuan $e_t > 0.005$ sedangkan disini $'.$et.' < 0.005$',
+							'input' => [
+								'a' => $a,
+								'stepError' => 3,
+								'beta' => $konstantaB,	
+								'c' => $c,
+								'cdt' => $cdt,
+								'et' => $et,
+								'beta' => $konstantaB,
+								'pMin1' => $pMin1,
+								'p' => $p,
+								'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $'.$p.' > '.$pMin1.'$ Diterima',
+								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $'.$cdt.' <= 0.375$ Diterima'
+							] 
+						]; 
 					}
+				} else {
+					// ketika TIDAK memenuhi syarat c/dt <= 0.375
+					$hasil = [
+						'status' => false,
+						'data' => 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini $'.$cdt.' > 0,375$',
+						'input' => [
+							'stepError' => 2,
+							'a' => $a,
+							'beta' => $konstantaB,	
+							'c' => $c,
+							'cdt' => $cdt,
+							'beta' => $konstantaB,
+							'pMin1' => $pMin1,
+							'p' => $p,
+							'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $'.$p.' > '.$pMin1.'$ Diterima',
+						]
+					]; 
 				}
+				
 			} else {
 				$hasil = [
 					'status' => false,
-					'data' => "Balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318"
-				];
+					'data' => 'Balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318',
+					'input' => [
+						'stepError' => 1,
+						'a' => $a,
+						'beta' => $konstantaB,	
+						'c' => $c,
+						'beta' => $konstantaB,
+						'pMin1' => $pMin1,
+						'p' => $p,
+					]
+				]; 
 				// return $hasil;
 			}
 			if ($Mn == 0) {

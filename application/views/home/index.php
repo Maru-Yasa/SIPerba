@@ -126,7 +126,7 @@
 		}
 
 		function visualEt(d, c, et) {
-			return `$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${et}$`
+			return `$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${et} > 0.005$`
 		}
 
 		function visualCdt(c, d, cdt) {
@@ -139,6 +139,14 @@
 
 		function visualBeta(beta) {
 			return `$β = ${beta}$`
+		}
+
+		function visualRo(p, as, b, d) {
+			return `$ρ = A_s / (b xx d) = ${as} / (${b} xx ${d}) = ${p}$`
+		}
+
+		function visualRoMin(pMin, fc, fy) {
+			return `$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${pMin}`
 		}
 
 		let submitButton = document.getElementById('submit');
@@ -170,16 +178,68 @@
 			fetch(`/api/hitung?b=${input['b']}&d=${input['d']}&as=${input['as']}&fy=${input['fy']}&fc=${input['fc']}`)
 				.then(res => res.json())
 				.then(data => {
+					console.log(data);
 					if (data.status) {
 						hasilSpan.classList.remove('text-error')
 						hasilSpan.classList.add('text-inherit')
 						hasilSpan.innerHTML =
-							`${visualBeta(data.input['beta'])} <br> ${ visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> ${data.input['beta'] == 0.65 ? visualEt(input['d'], data.input['c'], data.input['et']) : visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> ${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> ${visualMn(input['as'], input['fy'], input['d'], data.input['a'])} <br> $M_n=$${data.data} lb/inci`
+							`	$f'c = ${input['fc']}$ psi <br>
+								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+								${data.input['perbandinganRo']} <br>
+								${visualBeta(data.input['beta'])} <br> 
+								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
+								${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
+								${data.input['perbandinganCdt']} <br>
+								${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
+								${data.input['perbandinganEt']} <br>
+								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
+								${visualMn(input['as'], input['fy'], input['d'], data.input['a'])} <br> 
+								$M_n=$${data.data} lb/inci`
 						MathJax.typeset()
 					} else {
-						hasilSpan.classList.add('text-error')
-						hasilSpan.classList.remove('text-black')
-						hasilSpan.innerHTML = data.data
+						hasilSpan.classList.add('text-inherit')
+						if (data.input.stepError == 1) {
+
+							hasilSpan.innerHTML = `
+								$f'c = ${input['fc']}$ psi <br>
+								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+								<span class="text-error">${data.data}</span>
+							`
+						}
+
+						if (data.input.stepError == 2) {
+
+							hasilSpan.innerHTML = `
+								$f'c = ${input['fc']}$ psi <br>
+								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+								${data.input['perbandinganRo']} <br>
+								${visualBeta(data.input['beta'])} <br> 
+								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
+								${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
+								<span class="text-error">${data.data}</span>
+							`
+						}
+
+						if (data.input.stepError == 3) {
+
+						hasilSpan.innerHTML = `
+							$f'c = ${input['fc']}$ psi <br>
+							${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+							${data.input['perbandinganRo']} <br>
+							${visualBeta(data.input['beta'])} <br> 
+							${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
+							${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
+							${data.input['perbandinganCdt']} <br>
+							${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
+							<span class="text-error">${data.data}</span>
+						`
+						}
+
+						MathJax.typeset()
 					}
 					endLoading()
 				})
