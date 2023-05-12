@@ -45,11 +45,11 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="normal-case">$b$ $(mm)$</th>
-                            <th class="normal-case">$d$ $(mm)$</th>
-                            <th class="normal-case">$A_s$ $(mm^2)$</th>
-                            <th class="normal-case">$f_y$ $(Mpa)$</th>
-                            <th class="normal-case">$f'c$ $(Mpa)$</th>
+                            <th class="normal-case">$b$ $($inci$)$</th>
+                            <th class="normal-case">$d$ $($$inci)$</th>
+                            <th class="normal-case">$A_s$ $($inci$^2)$</th>
+                            <th class="normal-case">$f_y$ $(Psi)$</th>
+                            <th class="normal-case">$f'c$ $(Psi)$</th>
                             <th class="normal-case">$M_n$</th>
                             <th class="normal-case">Tanggal</th>
                         </tr>
@@ -57,7 +57,7 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($riwayat as $history) :
+                        foreach (array_reverse($riwayat) as $history) :
                         ?>
                             <tr>
                                 <td><?= $no; ?></td>

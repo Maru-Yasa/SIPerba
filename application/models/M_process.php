@@ -128,8 +128,9 @@ class M_process extends CI_Model
 					$konstantaB = 0.85;
 				}
 				if ($input["f'c"] > 4000 && $input["f'c"] <= 8000) {
-					// jika f'c > 4000 < 8000
-					$konstantaB = 0.80;
+					// jika f'c > 4000 < 8000 = 0,85 - 0,05 (f'c - 4000 / 1000)
+					$konstantaB = round(0.05 * (($input["f'c"] - 4000) / 1000), 2);
+					$konstantaB = round(0.85 - $konstantaB, 2);
 				} else {
 					// jika f'c > 8000
 					$konstantaB = 0.65;
@@ -167,7 +168,7 @@ class M_process extends CI_Model
 								'et' => $et,
 								'beta' => $konstantaB
 							] 
-						];                    
+						];                  
 						// return $hasil;
 					} else {
 						$hasil = [

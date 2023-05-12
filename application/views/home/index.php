@@ -43,38 +43,38 @@
 			class="md:col-span-2 shadow-lg bg-base-100 rounded-lg p-7 md:mx-0 mt-0 sm:mx-auto grid lg:grid-cols-1 lg:grid-rows-1 sm:grid-cols-1 gap-3 overflow-x-auto">
 			<div class="form-control">
 				<label class="label">
-					<span class="label-text">$(b)$ Lebar Balok $(mm)$</span>
+					<span class="label-text">$(b)$ Lebar Balok (inci)</span>
 				</label>
 				<input required id="b" type="number" placeholder="" name="balok" class="input w-full input-bordered" />
 			</div>
 			<div class="form-control">
 				<label class="label">
-					<span class="label-text">$(d)$ Tinggi Efektif Balok $(mm)$</span>
+					<span class="label-text">$(d)$ Tinggi Efektif Balok (inci)</span>
 				</label>
 				<input id="d" type="number" placeholder="" name="tinggi" class="input input-bordered" />
 			</div>
 			<div class="form-control">
 				<label class="label">
-					<span class="label-text">$(As)$ Luas Tulangan Tarik $(mm^2)$</span>
+					<span class="label-text">$(As)$ Luas Tulangan Tarik (inci$,^2$)</span>
 				</label>
 				<input id="as" type="number" placeholder="" name="luas" class="input input-bordered" />
 			</div>
 			<div class="form-control">
 				<label class="label">
-					<span class="label-text">$(f'c)$ Kekuatan Mutu Beton $(Mpa)$</span>
+					<span class="label-text">$(f'c)$ Kekuatan Mutu Beton (psi)</span>
 				</label>
 				<input id="fc" type="number" placeholder="" name="kekuatan" class="input input-bordered" />
 			</div>
 			<div class="form-control">
 				<label class="label">
-					<span class="label-text">$(F_y)$ Mutu Baja $(Mpa)$</span>
+					<span class="label-text">$(F_y)$ Mutu Baja (psi)</span>
 				</label>
 				<input id="fy" type="number" placeholder="" name="mutu" class="input input-bordered" />
 
 			</div>
 			<div class="form-control flex flex-row gap-3 items-end ">
 				<button id="submit" class="btn btn-primary">Hitung</button>
-				<button class="btn btn-error">Reset</button>
+				<button class="btn btn-error" id="reset">Reset</button>
 			</div>
 		</div>
 		<div
@@ -98,6 +98,12 @@
 				]
 			}
 		};
+
+		function _resetInput(input) {
+			input.forEach(e => {
+				document.getElementById(e).value = '';
+			});
+		}
 
 		function extractData(id) {
 			return document.getElementById(id).value
@@ -137,27 +143,33 @@
 
 		let submitButton = document.getElementById('submit');
 		let hasilSpan = document.getElementById('hasil')
-		submitButton.addEventListener('click', () => {
-			// let input = {
-			// 	"b": extractData('b'),
-			// 	"d": extractData('d'),
-			// 	"as": extractData('as'),
-			// 	"fy": extractData('fy'),
-			// 	"fc": extractData('fc')  
-			// }
+		let resetButton = document.getElementById('reset')
 
+		resetButton.addEventListener('click', () => {
+			_resetInput(['b', 'd', 'as', 'fy', 'fc'])
+			hasilSpan.innerHTML = ''
+		})
+
+		submitButton.addEventListener('click', () => {
 			let input = {
-				"b": 10,
-				"d": 18,
-				"as": 4,
-				"fy": 60000,
-				"fc": 5000
+				"b": extractData('b'),
+				"d": extractData('d'),
+				"as": extractData('as'),
+				"fy": extractData('fy'),
+				"fc": extractData('fc')  
 			}
+
+			// let input = {
+			// 	"b": 10,
+			// 	"d": 18,
+			// 	"as": 4,
+			// 	"fy": 60000,
+			// 	"fc": 9000
+			// }
 			loading()
 			fetch(`/api/hitung?b=${input['b']}&d=${input['d']}&as=${input['as']}&fy=${input['fy']}&fc=${input['fc']}`)
 				.then(res => res.json())
 				.then(data => {
-					console.log(data);
 					if (data.status) {
 						hasilSpan.classList.remove('text-error')
 						hasilSpan.classList.add('text-inherit')
