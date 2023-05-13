@@ -195,7 +195,7 @@
 								${data.input['perbandinganEt']} <br>
 								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 								${visualMn(input['as'], input['fy'], input['d'], data.input['a'])} <br> 
-								$M_n=$${data.data} lb/inci`
+								$M_n=$${data.data} lb-inci (446 kN-m)`
 						MathJax.typeset()
 					} else {
 						hasilSpan.classList.add('text-inherit')
