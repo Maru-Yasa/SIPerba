@@ -39,6 +39,7 @@
 	</div>
 	<div
 		class="mb-5 gap-3 grid sm:grid-cols-1 md:grid-cols-5 lg:grid-cols-5 sm:items-center md:items-start lg:items-start sm:mt-3 justify-center p-2">
+		<!-- Input awal start -->
 		<div
 			class="md:col-span-2 shadow-lg bg-base-100 rounded-lg p-7 md:mx-0 mt-0 sm:mx-auto grid lg:grid-cols-1 lg:grid-rows-1 sm:grid-cols-1 gap-3 overflow-x-auto">
 			<div class="form-control">
@@ -72,11 +73,15 @@
 				<input id="fy" type="number" placeholder="" name="mutu" class="input input-bordered" />
 
 			</div>
+			<!-- Input awal end -->
+			<!-- Submit button start -->
 			<div class="form-control flex flex-row gap-3 items-end ">
 				<button id="submit" class="btn btn-primary">Hitung</button>
 				<button class="btn btn-error" id="reset">Reset</button>
 			</div>
+			<!-- Submit button end -->
 		</div>
+		<!-- Box hasil start -->
 		<div
 			class="md:col-span-3 w-full bg-base-100 p-4 rounded-lg w-64 shadow-lg sm:mx-auto md:mx-0 md:mt-0 sm:mt-5 overflow-x-auto">
 			<h2 class="text-2xl font-semibold">Hasil:</h2>
@@ -84,6 +89,7 @@
 				<?= $this->session->flashdata('hasil'); ?>
 			</span>
 		</div>
+		<!-- Box hasil end -->
 	</div>
 
 	<script>
@@ -179,7 +185,9 @@
 				.then(res => res.json())
 				.then(data => {
 					console.log(data);
+			
 					if (data.status) {
+						// ketika berhasil
 						hasilSpan.classList.remove('text-error')
 						hasilSpan.classList.add('text-inherit')
 						hasilSpan.innerHTML =
@@ -210,7 +218,7 @@
 						}
 
 						if (data.input.stepError == 2) {
-
+							// c/dt yang error
 							hasilSpan.innerHTML = `
 								$f'c = ${input['fc']}$ psi <br>
 								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
@@ -224,7 +232,7 @@
 						}
 
 						if (data.input.stepError == 3) {
-
+							// et yang error
 						hasilSpan.innerHTML = `
 							$f'c = ${input['fc']}$ psi <br>
 							${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
@@ -237,7 +245,13 @@
 							${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
 							<span class="text-error">${data.data}</span>
 						`
+						} if (data.input.stepError == 0) {
+							hasilSpan.innerHTML = `
+							<span class="text-error">${data.data}</span>
+							`
 						}
+
+						
 
 						MathJax.typeset()
 					}

@@ -17,10 +17,8 @@ class M_process extends CI_Model
 			$p = $input["as"] / ($input["b"] * $input["d"]);
 			$Mn = 0;
 	
-			// var_dump([$p, $pMin2]);
 			if ($p > $pMin1) {
-				// print_r($p." > ".$pMin2."\n");
-				// print_r("Benar");
+				// berhasil p > pmin
 				$konstantaB = 0;
 	
 				// penentuan konstanta beta
@@ -119,15 +117,12 @@ class M_process extends CI_Model
 				}
 				
 			} else {
+				// gagal p < pmin1
 				$hasil = [
 					'status' => false,
 					'data' => 'Balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318',
 					'input' => [
 						'stepError' => 1,
-						'a' => $a,
-						'beta' => $konstantaB,	
-						'c' => $c,
-						'beta' => $konstantaB,
 						'pMin1' => $pMin1,
 						'p' => $p,
 					]
@@ -151,6 +146,9 @@ class M_process extends CI_Model
 		} catch (\Throwable $th) {
 			$hasil = [
 				'status' => false,
+				'input' => [
+					'stepError' => 0
+				],
 				'data' => "Data salah atau kurang lengkap, mohon untuk dicek kembali"
 			];
 		}

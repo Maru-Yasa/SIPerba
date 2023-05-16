@@ -72,19 +72,6 @@
 						<?php $no++ ?>	
                         <?php endforeach; ?>
                     </tbody>
-                    <!-- jangan di hapus -->
-                    <!-- <tfoot>
-                    <tr>
-                      <th></th> 
-                      <th class="normal-case">$b (inch)$</th> 
-                      <th class="normal-case">$d (inch)$</th> 
-                      <th class="normal-case">$As (inch^2)$</th> 
-                      <th class="normal-case">$Fy (psi)$</th> 
-                      <th class="normal-case">$f'c (psi)$</th> 
-                      <th class="normal-case">$M_n$</th> 
-                      <th class="normal-case">Tanggal</th>
-                    </tr>
-                  </tfoot> -->
                 </table>
             </div>
         </div>
