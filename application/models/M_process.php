@@ -6,6 +6,7 @@ class M_process extends CI_Model
     {
 
 		$hasil = [];
+		$syaratBeta = "";
 		try {
 			// 3 * f'c^1/2 / fy
 			$pMin1 = 3 * pow($input["f'c"], 1/2) / $input["fy"];
@@ -24,14 +25,18 @@ class M_process extends CI_Model
 				// penentuan konstanta beta
 				if ($input["f'c"] <= 4000) {
 					// jika f'c <= 4000
+					$syaratBeta = "Dimana $ f'c ≤ 4000 $ psi maka $ β = 0,85$";
 					$konstantaB = 0.85;
 				}
 				if ($input["f'c"] > 4000 && $input["f'c"] <= 8000) {
 					// jika f'c > 4000 < 8000 = 0,85 - 0,05 (f'c - 4000 / 1000)
 					$konstantaB = round(0.05 * (($input["f'c"] - 4000) / 1000), 2);
 					$konstantaB = round(0.85 - $konstantaB, 2);
-				} else {
+					$syaratBeta = "Dimana $ f'c > 4000 ≤ 8000 $ psi maka $ β = 0,80$";
+				} 
+				if ($input["f'c"] > 8000) {
 					// jika f'c > 8000
+					$syaratBeta = "Dimana $ f'c > 8000 $ psi maka $ β = 0,65$";
 					$konstantaB = 0.65;
 				}
 	
@@ -67,6 +72,8 @@ class M_process extends CI_Model
 								'a' => $a,
 								'beta' => $konstantaB,	
 								'c' => $c,
+								'C' => $C,
+								'T' => $T,
 								'cdt' => $cdt,
 								'et' => $et,
 								'beta' => $konstantaB,
@@ -74,7 +81,9 @@ class M_process extends CI_Model
 								'p' => $p,
 								'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $'.$p.' > '.$pMin1.'$ Diterima',
 								'perbandinganEt' => 'Syarat atau ketentuan $ε_t > 0.005$ = $'.$et.' > 0.005$ Diterima',
-								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $'.$cdt.' <= 0.375$ Diterima'
+								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $'.$cdt.' <= 0.375$ Diterima',
+								'syaratBeta' => $syaratBeta
+
 							] 
 						]; 
 					} else {
@@ -83,35 +92,45 @@ class M_process extends CI_Model
 							'status' => false,
 							'data' => 'Syarat atau ketentuan $e_t > 0.005$ sedangkan disini $'.$et.' < 0.005$',
 							'input' => [
-								'a' => $a,
 								'stepError' => 3,
+								'a' => $a,
 								'beta' => $konstantaB,	
 								'c' => $c,
+								'C' => $C,
+								'T' => $T,
 								'cdt' => $cdt,
 								'et' => $et,
 								'beta' => $konstantaB,
 								'pMin1' => $pMin1,
 								'p' => $p,
 								'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $'.$p.' > '.$pMin1.'$ Diterima',
-								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $'.$cdt.' <= 0.375$ Diterima'
+								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $'.$cdt.' <= 0.375$ Diterima',
+								'syaratBeta' => $syaratBeta
 							] 
 						]; 
 					}
 				} else {
 					// ketika TIDAK memenuhi syarat c/dt <= 0.375
+					$data = 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini '.$cdt.' > 0,375';
+					if ($cdt > 0.60) {
+						$data = 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ = '.$cdt.' sedangkan disini 0,62 > 0,60 yang dimana 0,60 menunjukkan terkontrol tekan, dan juga karenanya balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318';
+					}
 					$hasil = [
 						'status' => false,
-						'data' => 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini $'.$cdt.' > 0,375$',
+						'data' => $data,
 						'input' => [
 							'stepError' => 2,
 							'a' => $a,
 							'beta' => $konstantaB,	
 							'c' => $c,
+							'C' => $C,
+							'T' => $T,
 							'cdt' => $cdt,
 							'beta' => $konstantaB,
 							'pMin1' => $pMin1,
 							'p' => $p,
 							'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $'.$p.' > '.$pMin1.'$ Diterima',
+							'syaratBeta' => $syaratBeta
 						]
 					]; 
 				}

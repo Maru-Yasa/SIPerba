@@ -136,11 +136,11 @@
 		}
 
 		function visualCdt(c, d, cdt) {
-			return `$c/d_t = ${c} / ${d} = ${cdt} > 0.375 < 0.60$`
+			return `$c/d_t = ${c} / ${d} = ${cdt}$`
 		}
 
 		function visualC(a, beta, c) {
-			return `$c = a/β_1 = ${a}/${beta} = ${c}$`
+			return `$c = a/β_1 = ${a}/${beta} = ${c}$ inci`
 		}
 
 		function visualBeta(beta) {
@@ -153,6 +153,18 @@
 
 		function visualRoMin(pMin, fc, fy) {
 			return `$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${pMin}`
+		}
+
+		function visualCBesar(fc, b, a, C) {
+			return `$C = 0.85 xx f'c xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$`
+		}
+
+		function visualT(T) {
+			return `$T = A_s xx f_y = ${T} lb$`;
+		}
+
+		function visualDt(d) {
+			return `$d_t = d = ${d}$ inci`;
 		}
 
 		let submitButton = document.getElementById('submit');
@@ -178,7 +190,7 @@
 			// 	"d": 18,
 			// 	"as": 4,
 			// 	"fy": 60000,
-			// 	"fc": 9000
+			// 	"fc": 5000
 			// }
 			loading()
 			fetch(`/api/hitung?b=${input['b']}&d=${input['d']}&as=${input['as']}&fy=${input['fy']}&fc=${input['fc']}`)
@@ -196,12 +208,16 @@
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								${data.input['perbandinganRo']} <br>
 								${visualBeta(data.input['beta'])} <br> 
+								${data.input['syaratBeta']} <br> 
+								${visualDt(input['d'])} <br>
+								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
+								${visualT(data.input['T'])} <br>
+								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
 								${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
 								${data.input['perbandinganCdt']} <br>
 								${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
 								${data.input['perbandinganEt']} <br>
-								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 								${visualMn(input['as'], input['fy'], input['d'], data.input['a'])} <br> 
 								$M_n=$${data.data} lb-inci (446 kN-m)`
 						MathJax.typeset()
@@ -225,6 +241,11 @@
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								${data.input['perbandinganRo']} <br>
 								${visualBeta(data.input['beta'])} <br> 
+								${data.input['syaratBeta']} <br> 
+								${visualDt(input['d'])} <br>
+								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
+								${visualT(data.input['T'])} <br>
+								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
 								${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
 								<span class="text-error">${data.data}</span>
@@ -239,6 +260,8 @@
 							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 							${data.input['perbandinganRo']} <br>
 							${visualBeta(data.input['beta'])} <br> 
+							${data.input['syaratBeta']} <br> 
+							${visualDt(input['d'])} <br>
 							${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
 							${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
 							${data.input['perbandinganCdt']} <br>
