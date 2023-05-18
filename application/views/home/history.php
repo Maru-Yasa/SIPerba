@@ -21,7 +21,7 @@
                     </svg>
                 </label>
                 <ul tabindex="0" class="text-primary menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="<?= base_url('') ?>">Kalkulator</a></li>
+                    <li><a href="<?= base_url('') ?>">Perhitungan</a></li>
                     <li><a href="<?= base_url('home/history') ?>">Histori</a></li>
                 </ul>
             </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="navbar-end hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
-                <li><a href="<?= base_url('') ?>">Kalkulator</a></li>
+                <li><a href="<?= base_url('') ?>">Perhitungan</a></li>
                 <li><a href="<?= base_url('home/history') ?>">Histori</a></li>
             </ul>
         </div>

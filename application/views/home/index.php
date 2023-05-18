@@ -8,7 +8,7 @@
 	<link href="/assets/dist/full.css" rel="stylesheet" type="text/css" />
 	<script src="/assets/dist/tailwind.css"></script>
 	<link rel="stylesheet" href="/assets/dist/index.css">
-	<title>APLIKASI PERHITUNGAN BALOK BANGUNAN BETON MENGGUNAKAN METODE LRFD</title>
+	<title>Perhitungan Kondisi Lentur Balok Persegi Bertulangan Tungga</title>
 </head>
 
 <body class="">
@@ -24,15 +24,15 @@
 				</label>
 				<ul tabindex="0"
 					class="text-primary menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-					<li><a href="<?= base_url('') ?>">Kalkulator</a></li>
+					<li><a href="<?= base_url('') ?>">Perhitungan</a></li>
 					<li><a href="<?= base_url('home/history') ?>">Histori</a></li>
 				</ul>
 			</div>
-			<a class="btn btn-ghost normal-case text-xl">Perhitungan Bangunan Balok</a>
+			<a class="btn btn-ghost normal-case text-xl">Perhitungan Kondisi Lentur Balok Persegi Bertulangan Tungga</a>
 		</div>
 		<div class="navbar-end hidden lg:flex">
 			<ul class="menu menu-horizontal px-1">
-				<li><a href="<?= base_url('') ?>">Kalkulator</a></li>
+				<li><a href="<?= base_url('') ?>">Perhitungan</a></li>
 				<li><a href="<?= base_url('home/history') ?>">Histori</a></li>
 			</ul>
 		</div>
@@ -135,8 +135,8 @@
 			return `$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${et} > 0.005$`
 		}
 
-		function visualCdt(c, d, cdt) {
-			return `$c/d_t = ${c} / ${d} = ${cdt}$`
+		function visualCdt(c, d, cdt, terkontrolTekan = false) {
+			return `$c/d_t = ${c} / ${d} = ${cdt}$ ${terkontrolTekan ? '(Terkontrol Tekan)' : ''}`
 		}
 
 		function visualC(a, beta, c) {
@@ -144,7 +144,7 @@
 		}
 
 		function visualBeta(beta) {
-			return `$β = ${beta}$`
+			return `$β_1 = ${beta}$`
 		}
 
 		function visualRo(p, as, b, d) {
@@ -159,8 +159,8 @@
 			return `$C = 0.85 xx f'c xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$`
 		}
 
-		function visualT(T) {
-			return `$T = A_s xx f_y = ${T} lb$`;
+		function visualT(T, as, fy) {
+			return `$T = A_s xx f_y = ${as} xx ${fy} = ${T} lb$`;
 		}
 
 		function visualDt(d) {
@@ -190,7 +190,7 @@
 			// 	"d": 18,
 			// 	"as": 4,
 			// 	"fy": 60000,
-			// 	"fc": 5000
+			// 	"fc": 3000
 			// }
 			loading()
 			fetch(`/api/hitung?b=${input['b']}&d=${input['d']}&as=${input['as']}&fy=${input['fy']}&fc=${input['fc']}`)
@@ -211,7 +211,7 @@
 								${data.input['syaratBeta']} <br> 
 								${visualDt(input['d'])} <br>
 								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
-								${visualT(data.input['T'])} <br>
+								${visualT(data.input['T'], input['as'], input['fy'])} <br>
 								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
 								${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
@@ -244,10 +244,10 @@
 								${data.input['syaratBeta']} <br> 
 								${visualDt(input['d'])} <br>
 								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
-								${visualT(data.input['T'])} <br>
+								${visualT(data.input['T'], input['as'], input['fy'])} <br>
 								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
-								${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
+								${visualCdt(data.input['c'], input['d'], data.input['cdt'], data.input['terkontrolTekan'])} <br> 
 								<span class="text-error">${data.data}</span>
 							`
 						}
@@ -262,6 +262,9 @@
 							${visualBeta(data.input['beta'])} <br> 
 							${data.input['syaratBeta']} <br> 
 							${visualDt(input['d'])} <br>
+							${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
+							${visualT(data.input['T'], input['as'], input['fy'])} <br>
+							${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 							${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
 							${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
 							${data.input['perbandinganCdt']} <br>
