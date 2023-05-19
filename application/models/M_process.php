@@ -113,10 +113,12 @@ class M_process extends CI_Model
 				} else {
 					// ketika TIDAK memenuhi syarat c/dt <= 0.375
 					$data = 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini '.$cdt.' > 0,375';
+					$terkontrolTekan = false;
 					if ($cdt > 0.60) {
-						$data = 'Syarat atau ketentuan c/d_t  ≤ 0,375 = '.$cdt.' ≤ 0,375 sedangkan disini '.$cdt.' > 0,60 yang dimana 0,60 
+						$data = 'Syarat atau ketentuan $ c/d_t  ≤ 0,375 = '.$cdt.' ≤ 0,375 $ sedangkan disini '.$cdt.' > 0,60 yang dimana 0,60 
 						menunjukkan terkontrol tekan, dan juga karenanya balok tersebut tidaklah daktail dan tidak 
 						memenuhi Peraturan ACI 318.';
+						$terkontrolTekan = true;
 					}
 					$hasil = [
 						'status' => false,
@@ -134,7 +136,7 @@ class M_process extends CI_Model
 							'p' => $p,
 							'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $'.$p.' > '.$pMin1.'$ Diterima',
 							'syaratBeta' => $syaratBeta,
-							'terkontrolTekan' => true
+							'terkontrolTekan' => $terkontrolTekan
 						]
 					]; 
 				}

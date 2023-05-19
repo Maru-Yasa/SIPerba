@@ -111,6 +111,11 @@
 			});
 		}
 
+		function _pembulatan(x) {
+			return +(Math.round(x + "e+2")  + "e-2");
+
+		}
+
 		function extractData(id) {
 			return document.getElementById(id).value
 		}
@@ -124,11 +129,11 @@
 		}
 
 		function visualMn(as, fy, d, a) {
-			return `$M_n = A_s xx f_y (d - a / 2) = ${as} xx ${fy} (${d} - ${a} / 2)$`
+			return `$M_n = A_s xx f_y (d - a / 2) = ${(as)} xx ${fy} (${d} - ${a} / 2)$`
 		}
 
 		function visualA(as, fy, fc, b, a) {
-			return `$a = (A_s xx f_y) / (0.85 xx f'c xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$`
+			return `$a = (A_s xx f_y) / (0.85 xx f'c xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci`
 		}
 
 		function visualEt(d, c, et) {
@@ -136,7 +141,7 @@
 		}
 
 		function visualCdt(c, d, cdt, terkontrolTekan = false) {
-			return `$c/d_t = ${c} / ${d} = ${cdt}$ ${terkontrolTekan ? '(Terkontrol Tekan)' : ''}`
+			return `$c/d_t = ${c} / ${d} = ${cdt}$ ${terkontrolTekan == true ? '(Terkontrol Tekan)' : ''}`
 		}
 
 		function visualC(a, beta, c) {
@@ -152,7 +157,7 @@
 		}
 
 		function visualRoMin(pMin, fc, fy) {
-			return `$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${pMin}`
+			return `$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}`
 		}
 
 		function visualCBesar(fc, b, a, C) {
@@ -177,21 +182,21 @@
 		})
 
 		submitButton.addEventListener('click', () => {
-			let input = {
-				"b": extractData('b'),
-				"d": extractData('d'),
-				"as": extractData('as'),
-				"fy": extractData('fy'),
-				"fc": extractData('fc')  
-			}
-
 			// let input = {
-			// 	"b": 10,
-			// 	"d": 18,
-			// 	"as": 4,
-			// 	"fy": 60000,
-			// 	"fc": 3000
+			// 	"b": extractData('b'),
+			// 	"d": extractData('d'),
+			// 	"as": extractData('as'),
+			// 	"fy": extractData('fy'),
+			// 	"fc": extractData('fc')  
 			// }
+
+			let input = {
+				"b": 10,
+				"d": 18,
+				"as": 4,
+				"fy": 60000,
+				"fc": 3000
+			}
 			loading()
 			fetch(`/api/hitung?b=${input['b']}&d=${input['d']}&as=${input['as']}&fy=${input['fy']}&fc=${input['fc']}`)
 				.then(res => res.json())
