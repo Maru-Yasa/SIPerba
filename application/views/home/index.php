@@ -182,21 +182,21 @@
 		})
 
 		submitButton.addEventListener('click', () => {
-			// let input = {
-			// 	"b": extractData('b'),
-			// 	"d": extractData('d'),
-			// 	"as": extractData('as'),
-			// 	"fy": extractData('fy'),
-			// 	"fc": extractData('fc')  
-			// }
-
 			let input = {
-				"b": 10,
-				"d": 18,
-				"as": 4,
-				"fy": 60000,
-				"fc": 3000
+				"b": extractData('b'),
+				"d": extractData('d'),
+				"as": extractData('as'),
+				"fy": extractData('fy'),
+				"fc": extractData('fc')  
 			}
+
+			// let input = {
+			// 	"b": 10,
+			// 	"d": 18,
+			// 	"as": 4,
+			// 	"fy": 60000,
+			// 	"fc": 3000
+			// }
 			loading()
 			fetch(`/api/hitung?b=${input['b']}&d=${input['d']}&as=${input['as']}&fy=${input['fy']}&fc=${input['fc']}`)
 				.then(res => res.json())
