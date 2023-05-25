@@ -23,6 +23,16 @@ class Home extends CI_Controller
 		$this->load->view('home/setting');
 	}
 
+	public function users()
+	{
+		$this->load->view('home/users');
+	}
+
+	public function tambahuser()
+    {
+        $this->load->view('home/tambahuser');
+    }
+
     public function history()
     {
         $data['riwayat'] = $this->M_process->getHistory();
