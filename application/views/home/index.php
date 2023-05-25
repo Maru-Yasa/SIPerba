@@ -33,7 +33,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
                         </label>
                         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-black">
-                          <li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-person-fill text-primary group-hover:text-white"></i> Profile</a></li>
+                          <li><a href="/home/profile" class="hover:bg-primary hover:text-white group"><i class="bi bi-person-fill text-primary group-hover:text-white"></i> Profile</a></li>
                           <li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-box-arrow-in-left text-primary group-hover:text-white"></i> Logout</a></li>
                         </ul>
                     </div>
@@ -62,8 +62,8 @@
                 <div class="mt-5 w-full h-64 shadow rounded-lg p-3 flex flex-col items-center justify-center bg-primary relative overflow-hidden group">
                     <h1 class="text-3xl font-bold text-white z-10">Wellcome to <span class="">SIPerba</span></h1>
                     <div class="flex flex-col md:flex-row gap-2 mt-3 z-10">
-                        <a href="" class="btn btn-ghost bg-white text-black border-0 hover:bg-slate-200 gap-2"><i class="bi bi-calculator-fill"></i> Mulai Menghitung</a>
-                        <a href="" class="btn btn-accent gap-2"><i class="bi bi-clock-history"></i> Lihat Histori</a>
+                        <a href="/home/perhitungan" class="btn btn-ghost bg-white text-black border-0 hover:bg-slate-200 gap-2"><i class="bi bi-calculator-fill"></i> Mulai Menghitung</a>
+                        <a href="/home/history" class="btn btn-accent gap-2"><i class="bi bi-clock-history"></i> Lihat Histori</a>
                     </div>
                     <div class="absolute left-1 -buttom-5 opacity-40 group-hover:blur-sm ease-in duration-300 z-0">
                         <img src="/assets/images/undraw_mathematics_-4-otb.svg" width="200" alt="">
@@ -77,11 +77,11 @@
             <label for="my-drawer" class="drawer-overlay"></label>
             <ul class="menu p-4 w-80 bg-base-100 text-base-content">
                 <!-- Sidebar content here -->
-                <li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-speedometer2 text-primary group-hover:text-white"></i> Dasbor</a></li>
-                <li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-calculator text-primary group-hover:text-white"></i> Perhitungan</a></li>
-                <li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-clock-history text-primary group-hover:text-white"></i> History</a></li>
-                <li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-people-fill text-primary group-hover:text-white"></i> Users</a></li>
-                <li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-gear-fill text-primary group-hover:text-white"></i> Setting</a></li>
+                <li><a href="/" class="hover:bg-primary hover:text-white group"><i class="bi bi-speedometer2 text-primary group-hover:text-white"></i> Dasbor</a></li>
+                <li><a href="/home/perhitungan" class="hover:bg-primary hover:text-white group"><i class="bi bi-calculator text-primary group-hover:text-white"></i> Perhitungan</a></li>
+                <li><a href="/home/history" class="hover:bg-primary hover:text-white group"><i class="bi bi-clock-history text-primary group-hover:text-white"></i> History</a></li>
+                <li><a href="/home/users" class="hover:bg-primary hover:text-white group"><i class="bi bi-people-fill text-primary group-hover:text-white"></i> Users</a></li>
+                <li><a href="/home/setting" class="hover:bg-primary hover:text-white group"><i class="bi bi-gear-fill text-primary group-hover:text-white"></i> Setting</a></li>
 
             </ul>
         </div>
