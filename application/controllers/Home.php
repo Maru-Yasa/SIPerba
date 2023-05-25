@@ -8,6 +8,11 @@ class Home extends CI_Controller
         $this->load->view('home/index');
     }
 	
+	public function perhitungan()
+	{
+		$this->load->view('home/perhitungan');
+	}
+
     public function history()
     {
         $data['riwayat'] = $this->M_process->getHistory();
