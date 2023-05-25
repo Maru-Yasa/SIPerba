@@ -22,10 +22,8 @@
 			<div class="navbar bg-primary text-white">
 				<div class="flex-none">
 					<label for="my-drawer" class="btn btn-square btn-ghost drawer-button">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-							class="inline-block w-5 h-5 stroke-current">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-								d="M4 6h16M4 12h16M4 18h16"></path>
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
 						</svg>
 					</label>
 				</div>
@@ -35,19 +33,15 @@
 				<div class="flex-none">
 					<div class="dropdown dropdown-left">
 						<label tabindex="0" class="btn btn-square btn-ghost">
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-								class="inline-block w-5 h-5 stroke-current">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-									d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
 								</path>
 							</svg>
 						</label>
-						<ul tabindex="0"
-							class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-black">
+						<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-black">
 							<li><a href="/home/profile" class="hover:bg-primary hover:text-white group"><i class="bi bi-person-fill text-primary group-hover:text-white"></i> Profile</a></li>
 							</li>
-							<li><a class="hover:bg-primary hover:text-white group"><i
-										class="bi bi-box-arrow-in-left text-primary group-hover:text-white"></i>
+							<li><a class="hover:bg-primary hover:text-white group"><i class="bi bi-box-arrow-in-left text-primary group-hover:text-white"></i>
 									Logout</a></li>
 						</ul>
 					</div>
@@ -65,17 +59,14 @@
 				</div>
 			</div>
 
-			<div
-				class="mb-5 gap-3 grid sm:grid-cols-1 md:grid-cols-5 lg:grid-cols-5 sm:items-center md:items-start lg:items-start sm:mt-3 justify-center p-2">
+			<div class="mb-5 gap-3 grid sm:grid-cols-1 md:grid-cols-5 lg:grid-cols-5 sm:items-center md:items-start lg:items-start sm:mt-3 justify-center p-2">
 				<!-- Input awal start -->
-				<div
-					class="md:col-span-2 shadow-lg bg-base-100 rounded-lg p-7 md:mx-0 mt-0 sm:mx-auto grid lg:grid-cols-1 lg:grid-rows-1 sm:grid-cols-1 gap-3 overflow-x-auto">
+				<div class="md:col-span-2 shadow-lg bg-base-100 rounded-lg p-7 md:mx-0 mt-0 sm:mx-auto grid lg:grid-cols-1 lg:grid-rows-1 sm:grid-cols-1 gap-3 overflow-x-auto">
 					<div class="form-control">
 						<label class="label">
 							<span class="label-text">$(b)$ Lebar Balok (inci)</span>
 						</label>
-						<input required id="b" type="number" placeholder="" name="balok"
-							class="input w-full input-bordered" />
+						<input required id="b" type="number" placeholder="" name="balok" class="input w-full input-bordered" />
 					</div>
 					<div class="form-control">
 						<label class="label">
@@ -111,8 +102,7 @@
 					<!-- Submit button end -->
 				</div>
 				<!-- Box hasil start -->
-				<div
-					class="md:col-span-3 w-full bg-base-100 p-4 rounded-lg w-64 shadow-lg sm:mx-auto md:mx-0 md:mt-0 sm:mt-5 overflow-x-auto">
+				<div class="md:col-span-3 w-full bg-base-100 p-4 rounded-lg w-64 shadow-lg sm:mx-auto md:mx-0 md:mt-0 sm:mt-5 overflow-x-auto">
 					<h2 class="text-2xl font-semibold">Hasil:</h2>
 					<span class="text-error" id="hasil">
 						<?= $this->session->flashdata('hasil'); ?>
@@ -125,15 +115,15 @@
 		</div>
 		<div class="drawer-side">
 			<label for="my-drawer" class="drawer-overlay"></label>
-            <ul class="menu p-4 w-80 bg-base-100 text-base-content">
-                <!-- Sidebar content here -->
-                <li><a href="/" class="hover:bg-primary hover:text-white group"><i class="bi bi-speedometer2 text-primary group-hover:text-white"></i> Dasbor</a></li>
-                <li><a href="/home/perhitungan" class="hover:bg-primary hover:text-white group"><i class="bi bi-calculator text-primary group-hover:text-white"></i> Perhitungan</a></li>
-                <li><a href="/home/history" class="hover:bg-primary hover:text-white group"><i class="bi bi-clock-history text-primary group-hover:text-white"></i> History</a></li>
-                <li><a href="/home/users" class="hover:bg-primary hover:text-white group"><i class="bi bi-people-fill text-primary group-hover:text-white"></i> Users</a></li>
-                <li><a href="/home/setting" class="hover:bg-primary hover:text-white group"><i class="bi bi-gear-fill text-primary group-hover:text-white"></i> Setting</a></li>
+			<ul class="menu p-4 w-80 bg-base-100 text-base-content">
+				<!-- Sidebar content here -->
+				<li><a href="/" class="hover:bg-primary hover:text-white group"><i class="bi bi-speedometer2 text-primary group-hover:text-white"></i> Dasbor</a></li>
+				<li><a href="/home/perhitungan" class="hover:bg-primary hover:text-white group"><i class="bi bi-calculator text-primary group-hover:text-white"></i> Perhitungan</a></li>
+				<li><a href="/home/history" class="hover:bg-primary hover:text-white group"><i class="bi bi-clock-history text-primary group-hover:text-white"></i> History</a></li>
+				<li><a href="/home/users" class="hover:bg-primary hover:text-white group"><i class="bi bi-people-fill text-primary group-hover:text-white"></i> Users</a></li>
+				<li><a href="/home/setting" class="hover:bg-primary hover:text-white group"><i class="bi bi-gear-fill text-primary group-hover:text-white"></i> Setting</a></li>
 
-            </ul>
+			</ul>
 		</div>
 	</div>
 
@@ -157,7 +147,7 @@
 		}
 
 		function _pembulatan(x) {
-			return +(Math.round(x + "e+2")  + "e-2");
+			return +(Math.round(x + "e+2") + "e-2");
 
 		}
 
@@ -232,7 +222,7 @@
 				"d": extractData('d'),
 				"as": extractData('as'),
 				"fy": extractData('fy'),
-				"fc": extractData('fc')  
+				"fc": extractData('fc')
 			}
 
 			// let input = {
@@ -247,7 +237,7 @@
 				.then(res => res.json())
 				.then(data => {
 					console.log(data);
-			
+
 					if (data.status) {
 						// ketika berhasil
 						hasilSpan.classList.remove('text-error')
@@ -304,7 +294,7 @@
 
 						if (data.input.stepError == 3) {
 							// et yang error
-						hasilSpan.innerHTML = `
+							hasilSpan.innerHTML = `
 							$f'c = ${input['fc']}$ psi <br>
 							${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
@@ -321,23 +311,22 @@
 							${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
 							<span class="text-error">${data.data}</span>
 						`
-						} if (data.input.stepError == 0) {
+						}
+						if (data.input.stepError == 0) {
 							hasilSpan.innerHTML = `
 							<span class="text-error">${data.data}</span>
 							`
 						}
 
-						
+
 
 						MathJax.typeset()
 					}
 					endLoading()
 				})
 		})
-
 	</script>
-	<script type="text/javascript" id="MathJax-script" async
-		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js">
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js">
 	</script>
 
 
