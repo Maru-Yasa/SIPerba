@@ -19,7 +19,10 @@
                     <th class="normal-case">$f_y$ $(Psi)$</th>
                     <th class="normal-case">$f'c$ $(Psi)$</th>
                     <th class="normal-case">$M_n$</th>
+					<th class="normal-case">Dihitung Oleh</th>
+					<th class="normal-case">Status</th>
                     <th class="normal-case">Tanggal</th>
+					<th class="text-center" >Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +38,17 @@
                         <td><?= $history->fy ?></td>
                         <td><?= $history->fc ?></td>
                         <td><?= $history->hasil ?></td>
+						<td>Ma'ruf</td>
+						<!-- Jika tervirifikasi -->
+						<td class="text-green-400"><i class="bi bi-check-circle-fill"></i> Terverifikasi</td>
+						<!-- Jika ditolak -->
+						<!-- <td class="text-red-400"><i class="bi bi-x-circle-fill"></i> Ditolak</td> -->
                         <td><?= $history->date ?></td>
+						<td class="flex gap-2">
+							<button class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</button>
+							<button class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-x-circle-fill"></i> Tolak</button>
+							<button class="bg-yellow-400 p-3 hover:bg-yellow-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-eye-fill"></i></button>
+						</td>
                     </tr>
                     <?php $no++ ?>
                 <?php endforeach; ?>
