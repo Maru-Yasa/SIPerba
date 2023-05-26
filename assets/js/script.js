@@ -9,6 +9,16 @@ if (flashData) {
     )
 }
 
+const flashDataPerhitungan = $('.flash-perhitungan').data('flashdata');
+
+if (flashDataPerhitungan) {
+    Swal.fire(
+        'Sukses',
+        'Perhitungan Berhasil ' + flashDataPerhitungan,
+        'success'
+    )
+}
+
 // Sweet Alert
 const flashGagal = $('.flash-data-gagal').data('flashdata');
 

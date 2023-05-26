@@ -37,9 +37,7 @@ class Home extends CI_Controller
 	}
 	public function update_profile()
 	{
-		if ($this->session->userdata('role') == 'user') {
-			redirect('home/perhitungan');
-		}
+
 		$id = $this->session->userdata('user_id');
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$user = $this->db->get_where('users', ['id_user' => $id])->row_array();
@@ -137,6 +135,77 @@ class Home extends CI_Controller
 				$this->session->set_flashdata('flash', 'Di Updatee');
 				redirect('home/setting');
 			}
+		}
+	}
+	public function edituser($id)
+	{
+		$data['title'] = 'SIPerba | Edit User';
+		$data['user'] = $this->db->get_where('users', ['id_user' => $id])->row_array();
+		$this->load->view('layout/header', $data);
+		$this->load->view('home/edituser', $data);
+		$this->load->view('layout/footer');
+	}
+	public function updateuser($id)
+	{
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$user = $this->db->get_where('users', ['id_user' => $id])->row_array();
+		$new_username = htmlspecialchars($this->input->post('username'));
+		if ($new_username == $user['username']) {
+			$this->form_validation->set_rules('username', 'Username', 'required|trim');
+		} else {
+			$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.username]', ['is_unique' => 'This username has already registered!']);
+		}
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('flash-gagal', 'Di Update');
+			redirect('home/users');
+		} else {
+			$data = [
+				'nama' => htmlspecialchars($this->input->post('nama')),
+				'username' => htmlspecialchars($this->input->post('username')),
+				'role' => htmlspecialchars($this->input->post('role'))
+			];
+			$where = [
+				'id_user' => $id
+			];
+			$this->db->where($where);
+			$query =  $this->db->update('users', $data);
+			if (!$query) {
+				$this->session->set_flashdata('flash-gagal', 'Di Update');
+				redirect('home/users');
+			} else {
+				$this->session->set_flashdata('flash', 'Di Updatee');
+				redirect('home/users');
+			}
+		}
+	}
+	public function reject($id)
+	{
+		$data = [
+			'status' => 'Ditolak'
+		];
+		$where = [
+			'id' => $id
+		];
+		$this->db->where($where);
+		$query =  $this->db->update('history', $data);
+		if ($query) {
+			$this->session->set_flashdata('flash-perhitungan', 'Ditolak');
+			redirect('home/history');
+		}
+	}
+	public function verify($id)
+	{
+		$data = [
+			'status' => 'Terverifikasi'
+		];
+		$where = [
+			'id' => $id
+		];
+		$this->db->where($where);
+		$query =  $this->db->update('history', $data);
+		if ($query) {
+			$this->session->set_flashdata('flash-perhitungan', 'Terverifikasi');
+			redirect('home/history');
 		}
 	}
 

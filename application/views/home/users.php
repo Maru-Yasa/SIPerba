@@ -33,7 +33,7 @@
                         <td><?= $user->username; ?></td>
                         <td><?= $user->role; ?></td>
                         <td class="flex gap-2 justify-center">
-                            <a class="btn btn-accent" href=""><i class="bi bi-pencil-fill"></i></a>
+                            <a class="btn btn-accent" href="/home/edituser/<?= $user->id_user ?>"><i class="bi bi-pencil-fill"></i></a>
                             <a class="btn btn-error tombol-hapus" href="/home/hapus_user/<?= $user->id_user ?>"><i class="bi bi-trash-fill"></i></a>
                         </td>
                     </tr>

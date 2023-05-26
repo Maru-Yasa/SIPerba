@@ -156,6 +156,7 @@ class M_process extends CI_Model
 			if ($Mn == 0) {
 				$Mn = "-";
 			}
+			$userid = $this->session->userdata('user_id');
 			$data = [
 				'b' => $input["b"],
 				'd' => $input["d"],
@@ -163,6 +164,8 @@ class M_process extends CI_Model
 				'fy' => $input['fy'],
 				'fc' => $input["f'c"],
 				'hasil' => $Mn,
+				'id_user' => $userid,
+				'status' => 'Menunggu',
 				'date' => date("Y-m-d")
 			];
 			$this->db->insert('history', $data);
@@ -181,7 +184,10 @@ class M_process extends CI_Model
 
 	public function getHistory()
 	{
-		$query = $this->db->get('history')->result();
+		$this->db->select('t1.*, t2.username');
+		$this->db->from('history as t1');
+		$this->db->join('users as t2', 't1.id_user = t2.id_user', 'inner');
+		$query = $this->db->get()->result();
 		return $query;
 	}
 	public function countUser()
