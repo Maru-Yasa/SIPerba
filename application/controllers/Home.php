@@ -12,32 +12,26 @@ class Home extends CI_Controller
 	}
 	public function index()
 	{
-		if ($this->session->userdata('user_id')) {
-			if ($this->session->userdata('role' == 'arsitek')) {
-				redirect('home/perhitungan');
-			} else {
-				$data['user'] = $this->db->get_where('users', ['id_user' => $this->session->userdata('user_id')])->row_array();
-				$data['countU'] = $this->M_process->countUser();
-				$data['countH'] = $this->M_process->countHistory();
-				$this->load->view('layout/header');
-				$this->load->view('home/index', $data);
-				$this->load->view('layout/footer');
-			}
-		} else {
-			redirect('auth');
-		}
+		$this->M_process->redirect();
+		$data['title'] = 'SIPerba | Dashboard';
+		$data['user'] = $this->db->get_where('users', ['id_user' => $this->session->userdata('user_id')])->row_array();
+		$data['countU'] = $this->M_process->countUser();
+		$data['countH'] = $this->M_process->countHistory();
+		$this->load->view('layout/header', $data);
+		$this->load->view('home/index', $data);
+		$this->load->view('layout/footer');
 	}
 
 	public function perhitungan()
 	{
-		// $this->load->view('layout/header');
 		$this->load->view('home/perhitungan');
 	}
 
 	public function profile()
 	{
+		$data['title'] = 'SIPerba | Profile';
 		$data['user'] = $this->db->get_where('users', ['id_user' => $this->session->userdata('user_id')])->row_array();
-		$this->load->view('layout/header');
+		$this->load->view('layout/header', $data);
 		$this->load->view('home/profile', $data);
 		$this->load->view('layout/footer');
 	}
@@ -117,11 +111,13 @@ class Home extends CI_Controller
 
 	public function setting()
 	{
+		$this->M_process->redirect();
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('alamat', 'Alamat', 'required');
 		$data['setting'] = $this->M_process->getSetting();
 		if ($this->form_validation->run() == false) {
-			$this->load->view('layout/header');
+			$data['title'] = 'SIPerba | Setting';
+			$this->load->view('layout/header', $data);
 			$this->load->view('home/setting', $data);
 			$this->load->view('layout/footer');
 		} else {
@@ -146,13 +142,16 @@ class Home extends CI_Controller
 
 	public function users()
 	{
+		$this->M_process->redirect();
 		$data['dataUsers'] = $this->M_process->getUsers();
-		$this->load->view('layout/header');
+		$data['title'] = 'SIPerba | Users';
+		$this->load->view('layout/header', $data);
 		$this->load->view('home/users', $data);
 		$this->load->view('layout/footer');
 	}
 	public function hapus_user($id)
 	{
+		$this->M_process->redirect();
 		if ($this->session->userdata('role') == 'user') {
 			redirect('/home/perhitungan');
 		}
@@ -168,6 +167,7 @@ class Home extends CI_Controller
 	}
 	public function tambahuser()
 	{
+		$this->M_process->redirect();
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.username]', ['is_unique' => 'This username has already registered!']);
 		$this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]', [
@@ -175,7 +175,8 @@ class Home extends CI_Controller
 		]);
 		$this->form_validation->set_rules('role', 'Role', 'required');
 		if ($this->form_validation->run() == false) {
-			$this->load->view('layout/header');
+			$data['title'] = 'SIPerba | Tambah User';
+			$this->load->view('layout/header', $data);
 			$this->load->view('home/tambahuser');
 			$this->load->view('layout/footer');
 		} else {
@@ -199,8 +200,9 @@ class Home extends CI_Controller
 
 	public function history()
 	{
+		$data['title'] = 'SIPerba | History';
 		$data['riwayat'] = $this->M_process->getHistory();
-		$this->load->view('layout/header');
+		$this->load->view('layout/header', $data);
 		$this->load->view('home/history', $data);
 		$this->load->view('layout/footer');
 	}

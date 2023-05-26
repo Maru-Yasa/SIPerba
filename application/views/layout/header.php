@@ -9,7 +9,7 @@
     <script src="/assets/dist/tailwind.css"></script>
     <link rel="stylesheet" href="/assets/dist/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>SIPerba | Dasbor</title>
+    <title><?= $title; ?></title>
 </head>
 
 <body>

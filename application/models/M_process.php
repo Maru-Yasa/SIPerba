@@ -227,4 +227,11 @@ class M_process extends CI_Model
 		}
 		return $result;
 	}
+	public function redirect()
+	{
+		if ($this->session->userdata('role') == 'user') {
+			$redirect = redirect('/home/perhitungan');
+			return $redirect;
+		}
+	}
 }
