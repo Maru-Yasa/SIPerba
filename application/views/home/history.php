@@ -51,13 +51,18 @@
                         <?php } ?>
                         <td><?= $history->date ?></td>
                         <td class="flex gap-2">
-                            <?php if ($history->status == 'Menunggu') { ?>
-                                <a href="/home/verify/<?= $history->id ?>" class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
-                                <a href="/home/reject/<?= $history->id ?>" class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle" id="reject<?= $history->id ?>" data-id="<?= $history->id ?>"><i class="bi bi-x-circle-fill"></i> Tolak</a>
-                            <?php } else { ?>
-                                <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
-                                <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
-                            <?php } ?>
+                            <?php
+                            $rolee = $this->session->userdata('role');
+                            if ($rolee == 'admin' || $rolee == 'atasan') {
+                            ?>
+                                <?php if ($history->status == 'Menunggu') { ?>
+                                    <a href="/home/verify/<?= $history->id ?>" class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                                    <a href="/home/reject/<?= $history->id ?>" class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle" id="reject<?= $history->id ?>" data-id="<?= $history->id ?>"><i class="bi bi-x-circle-fill"></i> Tolak</a>
+                                <?php } else { ?>
+                                    <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                                    <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
+                            <?php }
+                            } ?>
                             <button class="bg-yellow-400 p-3 hover:bg-yellow-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-eye-fill"></i></button>
                         </td>
 
