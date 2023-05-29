@@ -115,9 +115,7 @@ class M_process extends CI_Model
 					$data = 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini ' . $cdt . ' > 0,375';
 					$terkontrolTekan = false;
 					if ($cdt > 0.60) {
-						$data = 'Syarat atau ketentuan $ c/d_t  ≤ 0,375 = ' . $cdt . ' ≤ 0,375 $ sedangkan disini ' . $cdt . ' > 0,60 yang dimana 0,60 
-						menunjukkan terkontrol tekan, dan juga karenanya balok tersebut tidaklah daktail dan tidak 
-						memenuhi Peraturan ACI 318.';
+						$data = 'Syarat atau ketentuan $ c/d_t  ≤ 0,375 = ' . $cdt . ' ≤ 0,375 $ sedangkan disini ' . $cdt . ' > 0,60 yang dimana 0,60 menunjukkan terkontrol tekan, dan juga karenanya balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318.';
 						$terkontrolTekan = true;
 					}
 					$hasil = [
@@ -180,6 +178,12 @@ class M_process extends CI_Model
 		}
 
 		return $hasil;
+	}
+
+	public function detailHistory($input)
+	{
+		$_data = $this->hitungApi($input);
+		return $_data;
 	}
 
 	public function getHistory()

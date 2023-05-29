@@ -58,7 +58,7 @@
                                 <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
                                 <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
                             <?php } ?>
-                            <button class="bg-yellow-400 p-3 hover:bg-yellow-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-eye-fill"></i></button>
+                            <a href="/home/detailHistory/<?= $history->id ?>" class="bg-yellow-400 p-3 hover:bg-yellow-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-eye-fill"></i></a>
                         </td>
 
                     </tr>

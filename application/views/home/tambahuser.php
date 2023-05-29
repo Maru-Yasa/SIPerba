@@ -52,7 +52,7 @@
                 <?= form_error('username', '<small class="text-error pl-3">', '</small>') ?>
             </div>
             <div class="form-control w-full">
-                <label class="label">
+                <label class="label">	
                     <span class="label-text">Role</span>
                 </label>
                 <select class="select select-bordered w-full" name="role" id="">

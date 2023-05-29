@@ -275,4 +275,24 @@ class Home extends CI_Controller
 		$this->load->view('home/history', $data);
 		$this->load->view('layout/footer');
 	}
+
+	public function detailHistory($id)
+	{
+		$data['title'] = 'SIPerba | History';
+		$history = $this->db->get_where('history',['id'=>$id])->row_array();
+		$data['history'] = $history;
+		$input = [
+			'b' => $history['b'],
+			'd' => $history['d'],
+			'as' => $history['as2'],
+			'fy' => $history['fy'],
+			"f'c" => $history['fc']
+		];
+		$rumus = $this->M_process->detailHistory($input);
+		$data['rumus'] = $rumus;
+
+		$this->load->view('layout/header', $data);
+		$this->load->view('home/detailHistory', $data);
+		$this->load->view('layout/footer');
+	}
 }
