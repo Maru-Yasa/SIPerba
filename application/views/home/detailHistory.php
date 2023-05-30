@@ -20,15 +20,17 @@
 
 <div id="printable" class="w-full px-12 mt-10 border p-2 mx-2">
 
-	<div class="mb-5 text-center flex ">
+	<div class="mb-5 text-center flex justify-around">
 		<img src="/assets/images/logo.png" class="w-32" alt="">
 		<div class="align-baseline">
 			<h1 class="text-xl font-bold">
 				PT. WIJAYA CONSTRUCTION
+				<br style="line-height: normal;margin: 0;">
 				Contractor & Building Solution
 			</h1>
 			<h3 class="text-md font-bold">
-						Jl. Dukuh Kupang XXV No.54, Dukuh Kupang, Kec.Dukuhpakis, Surabaya, Jawa Timur 60225
+				Jl. Dukuh Kupang XXV No.54, Dukuh Kupang, Kec.Dukuhpakis, Surabaya, Jawa Timur 60225
+						<br style="line-height: normal;margin: 0;">
 				Email : info@uwks.ac.id; Telp : (031) 5677577; Whatsapp : 082131006331
 			</h3>
 		</div>
