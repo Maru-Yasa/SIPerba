@@ -18,7 +18,7 @@
 </div>
 
 
-<div id="printable" class="w-full px-12 mt-10">
+<div id="printable" class="w-full px-12 mt-10 border p-2 mx-2">
 
 	<div class="mb-5 text-center flex ">
 		<img src="/assets/images/logo.png" class="w-32" alt="">
