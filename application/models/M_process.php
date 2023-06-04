@@ -154,6 +154,7 @@ class M_process extends CI_Model
 			if ($Mn == 0) {
 				$Mn = "-";
 			}
+			date_default_timezone_set('Asia/Jakarta');
 			$userid = $this->session->userdata('user_id');
 			$data = [
 				'b' => $input["b"],
@@ -164,7 +165,7 @@ class M_process extends CI_Model
 				'hasil' => $Mn,
 				'id_user' => $userid,
 				'status' => 'Menunggu',
-				'date' => date("Y-m-d")
+				'date' => date("Y-m-d H:i:s")
 			];
 			$this->db->insert('history', $data);
 		} catch (\Throwable $th) {
