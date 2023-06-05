@@ -109,6 +109,7 @@
 		}
 	};
 
+	// efektif
 	function windowPrint() {
 		var printable = document.getElementById('printable')
 		var originalContent = document.body.innerHTML

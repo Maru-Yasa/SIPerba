@@ -13,8 +13,9 @@
 </head>
 
 <body>
-    <div class="bg-gradient-to-r from-violet-600 to-indigo-600 h-screen w-full flex flex-col items-center justify-center">
-        <div class="p-3 bg-base-100 w-80 rounded-lg">
+    <div class="bg-gradient-to-r from-violet-600 to-indigo-600 h-screen w-full flex flex-col items-center justify-center prelative">
+		<img src="/assets/images/undraw_under_construction_-46-pa.svg" width="700" class="absolute top-10 right-1 opacity-40 z-0" alt="">
+        <div class="p-3 bg-base-100 w-80 rounded-lg z-10">
             <h1 class="text-3xl font-bold text-center w-full"><span class="text-primary">SIPerba</span> Login</h1>
 
             <form action="/auth" method="POST">
