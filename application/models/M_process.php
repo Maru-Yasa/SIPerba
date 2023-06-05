@@ -192,9 +192,11 @@ class M_process extends CI_Model
 		$this->db->select('t1.*, t2.username');
 		$this->db->from('history as t1');
 		$this->db->join('users as t2', 't1.id_user = t2.id_user', 'inner');
+		$this->db->order_by('t1.id', 'ASC'); // Menambahkan ORDER BY pada id_history
 		$query = $this->db->get()->result();
 		return $query;
 	}
+
 	public function countUser()
 	{
 		$this->db->from('users');
