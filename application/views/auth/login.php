@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <title>SIPerba | Login</title>
 </head>
-
 <body>
+
     <div class="bg-gradient-to-r from-violet-600 to-indigo-600 h-screen w-full flex flex-col items-center justify-center prelative">
-		<img src="/assets/images/undraw_under_construction_-46-pa.svg" width="700" class="absolute top-10 right-1 opacity-40 z-0" alt="">
+        <div class="absolute max-h-screen z-0 overflow-hidden">
+            <img id="bg" src="/assets/images/construction-bg.jpg" class="h-screen md:w-screen object-cover opacity-40" alt="">
+        </div>
         <div class="p-3 bg-base-100 w-80 rounded-lg z-10">
             <h1 class="text-3xl font-bold text-center w-full"><span class="text-primary">SIPerba</span> Login</h1>
 
@@ -33,5 +35,9 @@
         </div>
     </div>
 </body>
-
+<style>
+    .bg{
+        object-fit: contain;
+    }
+</style>
 </html>
