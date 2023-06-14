@@ -16,7 +16,7 @@
 			<img src="/assets/images/undraw_file_manager_re_ms29.svg" width="200" alt="">
 		</div>
 	</div>
-	<?php if ($history['is_verified_by_engineer'] === '1' && $history['is_verified_by_manager'] === '1') { ?>
+	<?php if ($history['is_verified_by_engineer'] === '1') { ?>
 		<button class="btn btn-primary gap-2 mt-3" onclick="windowPrint()"><i class="bi bi-printer-fill"></i> Print</button>
 	<?php } else { ?>
 		<button class="btn btn-primary gap-2 mt-3" disabled><i class="bi bi-printer-fill"></i> Print</button>
