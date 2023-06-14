@@ -21,6 +21,7 @@
 	<?php } else { ?>
 		<button class="btn btn-primary gap-2 mt-3" disabled><i class="bi bi-printer-fill"></i> Print</button>
 	<?php } ?>
+	<a href="/home/history" class="btn btn-warning gap-2 mt-3">Back</a>
 </div>
 
 
