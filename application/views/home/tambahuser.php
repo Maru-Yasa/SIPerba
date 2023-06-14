@@ -52,15 +52,15 @@
                 <?= form_error('username', '<small class="text-error pl-3">', '</small>') ?>
             </div>
             <div class="form-control w-full">
-                <label class="label">	
+                <label class="label">
                     <span class="label-text">Role</span>
                 </label>
                 <select class="select select-bordered w-full" name="role" id="">
-                    <?php if ($this->session->userdata('role') == 'admin') { ?>
-                        <option value="admin">Admin</option>
-                        <option value="atasan">Atasan</option>
+                    <?php if ($this->session->userdata('role') == 'engineer') { ?>
+                        <option value="engineer">engineer</option>
+                        <option value="manager">manager</option>
                     <?php } ?>
-                    <option value="user">User</option>
+                    <option value="user">user</option>
                 </select>
             </div>
             <div class="form-control w-full mt-3">

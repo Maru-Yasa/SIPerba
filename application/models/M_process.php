@@ -164,10 +164,11 @@ class M_process extends CI_Model
 				'fc' => $input["f'c"],
 				'hasil' => $Mn,
 				'id_user' => $userid,
-				'status' => 'Menunggu',
 				'date' => date("Y-m-d H:i:s")
 			];
-			$this->db->insert('history', $data);
+			if ($input['save'] == true) {
+				$this->db->insert('history', $data);
+			}
 		} catch (\Throwable $th) {
 			$hasil = [
 				'status' => false,
@@ -211,13 +212,13 @@ class M_process extends CI_Model
 	}
 	public function getUsers()
 	{
-		if ($this->session->userdata('role') == 'admin') {
+		if ($this->session->userdata('role') == 'engineer') {
 			$result = $this->db->get('users')->result();
-		} elseif ($this->session->userdata('role') == 'atasan') {
+		} elseif ($this->session->userdata('role') == 'manager') {
 			$userid = $this->session->userdata('user_id');
 			$this->db->select('*');
 			$this->db->from('users');
-			$this->db->where('role !=', 'admin');
+			$this->db->where('role !=', 'engineer');
 			$this->db->where('id_user !=', $userid);
 			$result = $this->db->get()->result();
 		} else {

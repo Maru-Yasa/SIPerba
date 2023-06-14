@@ -180,14 +180,14 @@ class Home extends CI_Controller
 	}
 	public function reject($id)
 	{
-		$data = [
-			'status' => 'Ditolak'
-		];
-		$where = [
-			'id' => $id
-		];
-		$this->db->where($where);
-		$query =  $this->db->update('history', $data);
+		$role = $this->session->userdata('role');
+		if ($role == 'engineer') {
+			$this->db->set('is_verified_by_engineer', 0);
+		} else {
+			$this->db->set('is_verified_by_manager', 0);
+		}
+		$this->db->where('id', $id);
+		$query =  $this->db->update('history');
 		if ($query) {
 			$this->session->set_flashdata('flash-perhitungan', 'Ditolak');
 			redirect('home/history');
@@ -195,14 +195,14 @@ class Home extends CI_Controller
 	}
 	public function verify($id)
 	{
-		$data = [
-			'status' => 'Terverifikasi'
-		];
-		$where = [
-			'id' => $id
-		];
-		$this->db->where($where);
-		$query =  $this->db->update('history', $data);
+		$role = $this->session->userdata('role');
+		if ($role == 'engineer') {
+			$this->db->set('is_verified_by_engineer', 1);
+		} else {
+			$this->db->set('is_verified_by_manager', 1);
+		}
+		$this->db->where('id', $id);
+		$query =  $this->db->update('history');
 		if ($query) {
 			$this->session->set_flashdata('flash-perhitungan', 'Terverifikasi');
 			redirect('home/history');
@@ -279,14 +279,15 @@ class Home extends CI_Controller
 	public function detailHistory($id)
 	{
 		$data['title'] = 'SIPerba | History';
-		$history = $this->db->get_where('history',['id'=>$id])->row_array();
+		$history = $this->db->get_where('history', ['id' => $id])->row_array();
 		$data['history'] = $history;
 		$input = [
 			'b' => $history['b'],
 			'd' => $history['d'],
 			'as' => $history['as2'],
 			'fy' => $history['fy'],
-			"f'c" => $history['fc']
+			"f'c" => $history['fc'],
+			"save" => false
 		];
 		$rumus = $this->M_process->detailHistory($input);
 		$data['rumus'] = $rumus;

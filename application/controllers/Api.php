@@ -1,15 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 use chriskacerguis\RestServer\RestController;
 
-class Api extends RestController {
+class Api extends RestController
+{
 
-    function __construct()
-    {
-        // Construct the parent class
-        parent::__construct();
-    }
+	function __construct()
+	{
+		// Construct the parent class
+		parent::__construct();
+	}
 
 	public function hitung_get()
 	{
@@ -19,9 +20,10 @@ class Api extends RestController {
 				'd' => $this->get('d'),
 				'as' => $this->get('as'),
 				'fy' => $this->get('fy'),
-				"f'c" => $this->get("fc")
+				"f'c" => $this->get("fc"),
+				"save" => true
 			];
-	
+
 			$result = $this->M_process->hitungApi($data);
 			return $this->response([
 				'status' => $result['status'],
@@ -38,5 +40,4 @@ class Api extends RestController {
 			]);
 		}
 	}
-
 }

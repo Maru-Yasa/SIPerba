@@ -1,20 +1,26 @@
 <style>
 	@media print {
-		body,html { 
-			margin-top:0%;
-			display:block;
-			height:100%;
+
+		body,
+		html {
+			margin-top: 0%;
+			display: block;
+			height: 100%;
 		}
 	}
 </style>
 <div class="w-full px-5 mt-4">
-    <div class="mt-3 rounded-lg bg-primary p-10 h-32 relative overflow-hidden flex items-center group">
-        <h1 class="text-3xl font-bold text-white z-10"><i class="bi bi-gear-fill"></i> Detail Histori</h1>
-        <div class="absolute -top-2 z-0 right-1 opacity-40 group-hover:blur-sm ease-in duration-300">
-            <img src="/assets/images/undraw_file_manager_re_ms29.svg" width="200" alt="">
-        </div>
-    </div>
-	<button class="btn btn-primary gap-2 mt-3" onclick="windowPrint()"><i class="bi bi-printer-fill"></i> Print</button>
+	<div class="mt-3 rounded-lg bg-primary p-10 h-32 relative overflow-hidden flex items-center group">
+		<h1 class="text-3xl font-bold text-white z-10"><i class="bi bi-gear-fill"></i> Detail Histori</h1>
+		<div class="absolute -top-2 z-0 right-1 opacity-40 group-hover:blur-sm ease-in duration-300">
+			<img src="/assets/images/undraw_file_manager_re_ms29.svg" width="200" alt="">
+		</div>
+	</div>
+	<?php if ($history['is_verified_by_engineer'] === '1' && $history['is_verified_by_manager'] === '1') { ?>
+		<button class="btn btn-primary gap-2 mt-3" onclick="windowPrint()"><i class="bi bi-printer-fill"></i> Print</button>
+	<?php } else { ?>
+		<button class="btn btn-primary gap-2 mt-3" disabled><i class="bi bi-printer-fill"></i> Print</button>
+	<?php } ?>
 </div>
 
 
@@ -30,7 +36,7 @@
 			</h1>
 			<h3 class="text-md font-bold">
 				Jl. Dukuh Kupang XXV No.54, Dukuh Kupang, Kec.Dukuhpakis, Surabaya, Jawa Timur 60225
-						<br style="line-height: normal;margin: 0;">
+				<br style="line-height: normal;margin: 0;">
 				Email : info@uwks.ac.id; Telp : (031) 5677577; Whatsapp : 082131006331
 			</h3>
 		</div>
@@ -76,8 +82,8 @@
 				<td class="border"><?= $rumus['input']['c'] ?></td>
 				<td class="border"><?= $rumus['input']['C'] ?></td>
 				<td class="border"><?= $rumus['input']['T'] ?></td>
-				<td class="border"><?= isset($rumus['input']['cdt']) ? $rumus['input']['cdt'] : '-'?></td>
-				<td class="border"><?= isset($rumus['input']['et']) ? $rumus['input']['et'] : '-'?></td>
+				<td class="border"><?= isset($rumus['input']['cdt']) ? $rumus['input']['cdt'] : '-' ?></td>
+				<td class="border"><?= isset($rumus['input']['et']) ? $rumus['input']['et'] : '-' ?></td>
 				<td class="border"><?= $rumus['input']['pMin1'] ?></td>
 				<td class="border"><?= $rumus['input']['p'] ?></td>
 			</tbody>
@@ -123,7 +129,7 @@
 		var doc = new window.jsPDF('l', 'pt', 'letter')
 		var printable = document.getElementById('printable')
 		doc.html(printable, {
-			callback: function(doc){
+			callback: function(doc) {
 				doc.save('document.pdf')
 			},
 			margin: [10, 10, 10, 10],
@@ -139,7 +145,7 @@
 		var pdf = new jsPDF('l', 'pt', 'letter');
 		var printable = document.getElementById('printable')
 		pdf.html(printable, {
-			callback: function (pdf) {
+			callback: function(pdf) {
 				var iframe = document.createElement('iframe');
 				iframe.setAttribute('style', 'position:absolute;right:0; top:0; bottom:0; height:100%; width:500px');
 				document.body.appendChild(iframe);
@@ -149,52 +155,52 @@
 	}
 
 	function visualMn(as, fy, d, a) {
-			return `<li> $M_n = A_s xx f_y (d - a / 2) = ${(as)} xx ${fy} (${d} - ${a} / 2)$ </li>`
-		}
+		return `<li> $M_n = A_s xx f_y (d - a / 2) = ${(as)} xx ${fy} (${d} - ${a} / 2)$ </li>`
+	}
 
-		function visualA(as, fy, fc, b, a) {
-			return `<li>$a = (A_s xx f_y) / (0.85 xx f'c xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci</li>`
-		}
+	function visualA(as, fy, fc, b, a) {
+		return `<li>$a = (A_s xx f_y) / (0.85 xx f'c xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci</li>`
+	}
 
-		function visualEt(d, c, et) {
-			return `<li>$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${et} > 0.005$</li>`
-		}
+	function visualEt(d, c, et) {
+		return `<li>$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${et} > 0.005$</li>`
+	}
 
-		function visualCdt(c, d, cdt, terkontrolTekan = false) {
-			return `<li>$c/d_t = ${c} / ${d} = ${cdt}$ ${terkontrolTekan == true ? '(Terkontrol Tekan)' : ''}</li>`
-		}
+	function visualCdt(c, d, cdt, terkontrolTekan = false) {
+		return `<li>$c/d_t = ${c} / ${d} = ${cdt}$ ${terkontrolTekan == true ? '(Terkontrol Tekan)' : ''}</li>`
+	}
 
-		function visualC(a, beta, c) {
-			return `<li>$c = a/β_1 = ${a}/${beta} = ${c}$ inci</li>`
-		}
+	function visualC(a, beta, c) {
+		return `<li>$c = a/β_1 = ${a}/${beta} = ${c}$ inci</li>`
+	}
 
-		function visualBeta(beta) {
-			return `<li>$β_1 = ${beta}$</li>`
-		}
+	function visualBeta(beta) {
+		return `<li>$β_1 = ${beta}$</li>`
+	}
 
-		function visualRo(p, as, b, d) {
-			return `<li>$ρ = A_s / (b xx d) = ${as} / (${b} xx ${d}) = ${p}$</li>`
-		}
+	function visualRo(p, as, b, d) {
+		return `<li>$ρ = A_s / (b xx d) = ${as} / (${b} xx ${d}) = ${p}$</li>`
+	}
 
-		function visualRoMin(pMin, fc, fy) {
-			return `<li>$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}</li>`
-		}
+	function visualRoMin(pMin, fc, fy) {
+		return `<li>$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}</li>`
+	}
 
-		function visualCBesar(fc, b, a, C) {
-			return `<li>$C = 0.85 xx f'c xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$</li>`
-		}
+	function visualCBesar(fc, b, a, C) {
+		return `<li>$C = 0.85 xx f'c xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$</li>`
+	}
 
-		function visualT(T, as, fy) {
-			return `$T = A_s xx f_y = ${as} xx ${fy} = ${T} lb$</li>`;
-		}
+	function visualT(T, as, fy) {
+		return `$T = A_s xx f_y = ${as} xx ${fy} = ${T} lb$</li>`;
+	}
 
-		function visualDt(d) {
-			return `$d_t = d = ${d}$ inci</li>`;
-		}
+	function visualDt(d) {
+		return `$d_t = d = ${d}$ inci</li>`;
+	}
 
 
-		console.log(`<?= var_dump($rumus, $history) ?>`);
-		console.log(`<?= json_encode($rumus) ?>`);
+	console.log(`<?= var_dump($rumus, $history) ?>`);
+	console.log(`<?= json_encode($rumus) ?>`);
 	var data = JSON.parse(`<?= json_encode($rumus) ?>`)
 	var rumus = JSON.parse(`<?= json_encode($history) ?>`)
 	var hasilSpan = document.getElementById('rumus');
@@ -281,7 +287,5 @@
 		`
 		}
 	}
-
-
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.js" integrity="sha512-/fgTphwXa3lqAhN+I8gG8AvuaTErm1YxpUjbdCvwfTMyv8UZnFyId7ft5736xQ6CyQN4Nzr21lBuWWA9RTCXCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
