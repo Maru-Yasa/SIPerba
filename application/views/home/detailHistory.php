@@ -100,6 +100,16 @@
 
 		</ul>
 	</div>
+	<div class="w-full mt-20 flex gap-10">
+		<div class="w-fit text-center">
+			<h1 class="text-3xl">Engineer</h1>
+			<hr class="text-black mt-20">
+		</div>
+		<div class="w-fit text-center">
+			<h1 class="text-3xl">Manager</h1>
+			<hr class="text-black mt-20">
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js">
