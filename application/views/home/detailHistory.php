@@ -7,6 +7,10 @@
 			display: block;
 			height: 100%;
 		}
+
+		#printable {
+			zoom: 80%
+		}
 	}
 </style>
 <div class="w-full px-5 mt-4">
