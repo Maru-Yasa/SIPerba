@@ -218,7 +218,7 @@ class M_process extends CI_Model
 			$userid = $this->session->userdata('user_id');
 			$this->db->select('*');
 			$this->db->from('users');
-			$this->db->where('role !=', 'engineer');
+			$this->db->where('role =', 'user');
 			$this->db->where('id_user !=', $userid);
 			$result = $this->db->get()->result();
 		} else {
