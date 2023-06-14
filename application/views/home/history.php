@@ -21,8 +21,8 @@
                     <th class="normal-case">$f'c$ $(Psi)$</th>
                     <th class="normal-case">$M_n$</th>
                     <th class="normal-case">Dihitung Oleh</th>
-                    <th class="normal-case">is_verified_by_engineer</th>
-                    <th class="normal-case">is_verified_by_manager</th>
+                    <th class="normal-case">Verified by Engineer</th>
+                    <th class="normal-case">Verified by Manager</th>
                     <th class="normal-case">Tanggal</th>
                     <th class="text-center">Aksi</th>
                 </tr>
@@ -43,18 +43,18 @@
                         <td><?= $history->username ?></td>
                         <!-- Jika tervirifikasi -->
                         <?php if ($history->is_verified_by_engineer === '1') { ?>
-                            <td class="text-green-400 text-center"><i class="bi bi-check-circle-fill"></td>
+                            <td class="text-green-400 text-center"><i class="bi bi-check-circle-fill"> Terverifikasi</td>
                         <?php } elseif ($history->is_verified_by_engineer === '0') { ?>
                             <!-- Jika ditolak -->
-                            <td class="text-red-400 text-center"><i class="bi bi-x-circle-fill"></i></td>
+                            <td class="text-red-400 text-center"><i class="bi bi-x-circle-fill"></i> Ditolak</td>
                         <?php } else { ?>
                             <td class="text-yellow-400 text-center"><i class="bi bi-exclamation-circle-fill"></i> Menunggu</td>
                         <?php } ?>
                         <?php if ($history->is_verified_by_manager === '1') { ?>
-                            <td class="text-green-400 text-center"><i class="bi bi-check-circle-fill"></td>
+                            <td class="text-green-400 text-center"><i class="bi bi-check-circle-fill"> Terverifikasi</td>
                         <?php } elseif ($history->is_verified_by_manager === '0') { ?>
                             <!-- Jika ditolak -->
-                            <td class="text-red-400 text-center"><i class="bi bi-x-circle-fill"></i></td>
+                            <td class="text-red-400 text-center"><i class="bi bi-x-circle-fill"></i> Ditolak</td>
                         <?php } else { ?>
                             <td class="text-yellow-400 text-center"><i class="bi bi-exclamation-circle-fill"></i> Menunggu</td>
                         <?php } ?>
