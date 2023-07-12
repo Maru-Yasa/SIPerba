@@ -1,3 +1,7 @@
+<?php
+$rolee = $this->session->userdata('role');
+$userid = $this->session->userdata('user_id');
+?>
 <div class="flash-perhitungan" data-flashdata="<?= $this->session->flashdata('flash-perhitungan'); ?>"></div>
 <div class="flash-data-gagal" data-flashdata="<?= $this->session->flashdata('flash-gagal'); ?>"></div>
 <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
@@ -27,7 +31,9 @@
                     <th class="normal-case">Verified by Manager</th>
                     <th class="normal-case">Tanggal</th>
                     <th class="normal-case">Di Edit</th>
-                    <th class="text-center">Konfirmasi</th>
+                    <?php if ($rolee !== 'user') { ?>
+                        <th class="text-center">Konfirmasi</th>
+                    <?php } ?>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -69,40 +75,40 @@
                         <?php } else { ?>
                             <td class="text-red-400 text-center"><i class="bi bi-x-circle-fill"></i></td>
                         <?php } ?>
-                        <td class="flex gap-2">
-                            <?php
-                            $rolee = $this->session->userdata('role');
-                            $userid = $this->session->userdata('user_id');
-                            // var_dump($rolee);
-                            if ($rolee == 'engineer') {
-                            ?>
-                                <?php if ($history->is_verified_by_engineer == null) { ?>
-                                    <?php if ($history->hasil !== '-') { ?>
-                                        <a href="/home/verify/<?= $history->id ?>" class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                        <?php if ($rolee !== 'user') { ?>
+                            <td class="flex gap-2">
+                                <?php
+                                if ($rolee == 'engineer') {
+                                ?>
+                                    <?php if ($history->is_verified_by_engineer == null) {
+                                        if ($history->hasil !== '-') {
+                                    ?>
+                                            <a href="/home/verify/<?= $history->id ?>" class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                                        <?php } else { ?>
+                                            <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                                        <?php } ?>
+                                        <a href="/home/reject/<?= $history->id ?>" class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle" id="reject<?= $history->id ?>" data-id="<?= $history->id ?>"><i class="bi bi-x-circle-fill"></i> Tolak</a>
                                     <?php } else { ?>
                                         <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
-                                    <?php } ?>
-                                    <a href="/home/reject/<?= $history->id ?>" class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle" id="reject<?= $history->id ?>" data-id="<?= $history->id ?>"><i class="bi bi-x-circle-fill"></i> Tolak</a>
-                                <?php } else { ?>
-                                    <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
-                                    <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
-                                <?php }
-                            } elseif ($rolee == 'manager') { ?>
-                                <?php if ($history->is_verified_by_manager == null && $history->is_verified_by_engineer != null) { ?>
-                                    <?php if ($history->hasil !== '-') { ?>
-                                        <a href="/home/verify/<?= $history->id ?>" class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                                        <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
+                                    <?php }
+                                } elseif ($rolee == 'manager') { ?>
+                                    <?php if ($history->is_verified_by_manager == null && $history->is_verified_by_engineer != null) { ?>
+                                        <?php if ($history->hasil !== '-') { ?>
+                                            <a href="/home/verify/<?= $history->id ?>" class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                                        <?php } else { ?>
+                                            <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
+                                        <?php } ?>
+                                        <a href="/home/reject/<?= $history->id ?>" class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle" id="reject<?= $history->id ?>" data-id="<?= $history->id ?>"><i class="bi bi-x-circle-fill"></i> Tolak</a>
                                     <?php } else { ?>
                                         <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
-                                    <?php } ?>
-                                    <a href="/home/reject/<?= $history->id ?>" class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle" id="reject<?= $history->id ?>" data-id="<?= $history->id ?>"><i class="bi bi-x-circle-fill"></i> Tolak</a>
-                                <?php } else { ?>
-                                    <a class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
-                                    <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
-                            <?php  }
-                            } ?>
+                                        <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
+                                <?php  }
+                                } ?>
 
-                        </td>
-                        <td>
+                            </td>
+                        <?php } ?>
+                        <td class="text-end">
                             <?php if ($history->id_user == $userid) { ?>
                                 <a href="/home/edit/<?= $history->id ?>" class="bg-blue-400 p-3 hover:bg-blue-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-pen-fill"></i></a>
                             <?php } ?>
