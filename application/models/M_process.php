@@ -168,6 +168,23 @@ class M_process extends CI_Model
 			];
 			if ($input['save'] == true) {
 				$this->db->insert('history', $data);
+			} elseif ($input['update'] == true) {
+				$id2 = $input['id'];
+				$data = [
+					'b' => $input["b"],
+					'd' => $input["d"],
+					'as2' => $input['as'],
+					'fy' => $input['fy'],
+					'fc' => $input["f'c"],
+					'hasil' => $Mn,
+					'is_verified_by_manager' => null,
+					'is_verified_by_engineer' => null,
+					'diedit' => 1,
+					'id_user' => $userid,
+					'date' => date("Y-m-d H:i:s")
+				];
+				$this->db->where('id', $id2);
+				$this->db->update('history', $data);
 			}
 		} catch (\Throwable $th) {
 			$hasil = [

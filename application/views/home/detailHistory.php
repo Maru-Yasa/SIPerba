@@ -7,10 +7,6 @@
 			display: block;
 			height: 100%;
 		}
-
-		#printable {
-			zoom: 80%
-		}
 	}
 </style>
 <div class="w-full px-5 mt-4">
@@ -35,7 +31,7 @@
 		<img src="/assets/images/logo.png" class="w-32" alt="">
 		<div class="align-baseline">
 			<h1 class="text-xl font-bold">
-				PT. WIJAYA CONSTRUCTION
+				PT. MALENDES CONSTRUCTION
 				<br style="line-height: normal;margin: 0;">
 				Contractor & Building Solution
 			</h1>
@@ -100,16 +96,18 @@
 
 		</ul>
 	</div>
-	<div class="w-full mt-20 flex gap-10">
+	<!-- <h1>Engineer</h1>
+	<h1>Manager</h1> -->
+	<!-- <div class="w-full mt-20 flex gap-10 justify-end">
 		<div class="w-fit text-center">
-			<h1 class="text-3xl">Engineer</h1>
+			<h3 class="text-3xl">Engineer</h3>
 			<hr class="text-black mt-20">
 		</div>
 		<div class="w-fit text-center">
-			<h1 class="text-3xl">Manager</h1>
+			<h3 class="text-3xl">Manager</h3>
 			<hr class="text-black mt-20">
 		</div>
-	</div>
+	</div> -->
 </div>
 
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js">

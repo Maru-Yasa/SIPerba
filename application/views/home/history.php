@@ -1,4 +1,6 @@
 <div class="flash-perhitungan" data-flashdata="<?= $this->session->flashdata('flash-perhitungan'); ?>"></div>
+<div class="flash-data-gagal" data-flashdata="<?= $this->session->flashdata('flash-gagal'); ?>"></div>
+<div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
 <div class="w-full px-5 mt-4">
     <div class="mt-3 rounded-lg bg-primary p-10 h-32 relative overflow-hidden flex items-center group">
         <h1 class="text-3xl font-bold text-white z-10"><i class="bi bi-gear-fill"></i> Histori</h1>
@@ -24,6 +26,8 @@
                     <th class="normal-case">Verified by Engineer</th>
                     <th class="normal-case">Verified by Manager</th>
                     <th class="normal-case">Tanggal</th>
+                    <th class="normal-case">Di Edit</th>
+                    <th class="text-center">Konfirmasi</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -41,6 +45,7 @@
                         <td><?= $history->fc ?></td>
                         <td><?= $history->hasil ?></td>
                         <td><?= $history->username ?></td>
+
                         <!-- Jika tervirifikasi -->
                         <?php if ($history->is_verified_by_engineer === '1') { ?>
                             <td class="text-green-400 text-center"><i class="bi bi-check-circle-fill"> Terverifikasi</td>
@@ -59,9 +64,15 @@
                             <td class="text-yellow-400 text-center"><i class="bi bi-exclamation-circle-fill"></i> Menunggu</td>
                         <?php } ?>
                         <td><?= $history->date ?></td>
+                        <?php if ($history->diedit === '1') { ?>
+                            <td class="text-green-400 text-center"><i class="bi bi-check-circle-fill"></td>
+                        <?php } else { ?>
+                            <td class="text-red-400 text-center"><i class="bi bi-x-circle-fill"></i></td>
+                        <?php } ?>
                         <td class="flex gap-2">
                             <?php
                             $rolee = $this->session->userdata('role');
+                            $userid = $this->session->userdata('user_id');
                             // var_dump($rolee);
                             if ($rolee == 'engineer') {
                             ?>
@@ -77,7 +88,7 @@
                                     <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
                                 <?php }
                             } elseif ($rolee == 'manager') { ?>
-                                <?php if ($history->is_verified_by_manager == null) { ?>
+                                <?php if ($history->is_verified_by_manager == null && $history->is_verified_by_engineer != null) { ?>
                                     <?php if ($history->hasil !== '-') { ?>
                                         <a href="/home/verify/<?= $history->id ?>" class="bg-green-400 p-3 hover:bg-green-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-check-circle-fill"></i> Verifikasi</a>
                                     <?php } else { ?>
@@ -89,9 +100,19 @@
                                     <a class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle btn-disabled"><i class="bi bi-x-circle-fill"></i> Tolak</a>
                             <?php  }
                             } ?>
-                            <a href="/home/detailHistory/<?= $history->id ?>" class="bg-yellow-400 p-3 hover:bg-yellow-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-eye-fill"></i></a>
-                        </td>
 
+                        </td>
+                        <td>
+                            <?php if ($history->id_user == $userid) { ?>
+                                <a href="/home/edit/<?= $history->id ?>" class="bg-blue-400 p-3 hover:bg-blue-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-pen-fill"></i></a>
+                            <?php } ?>
+                            <?php if ($rolee == 'engineer' || $rolee == 'manager') { ?>
+                                <a href="/home/delete/<?= $history->id ?>" class="bg-red-400 p-3 hover:bg-red-300 rounded-lg text-base-100 gap-2 align-middle tombol-hapus"><i class="bi bi-trash-fill"></i></a>
+                            <?php } ?>
+
+                            <a href="/home/detailHistory/<?= $history->id ?>" class="bg-yellow-400 p-3 hover:bg-yellow-300 rounded-lg text-base-100 gap-2 align-middle"><i class="bi bi-eye-fill"></i></a>
+
+                        </td>
                     </tr>
                     <?php $no++ ?>
                 <?php endforeach; ?>

@@ -26,7 +26,11 @@ class Home extends CI_Controller
 	{
 		$this->load->view('home/perhitungan');
 	}
-
+	public function edit($id)
+	{
+		$data['hitung'] = $this->db->get_where('history', ['id' => $id])->row_array();
+		$this->load->view('home/edit_perhitungan', $data);
+	}
 	public function profile()
 	{
 		$data['title'] = 'SIPerba | Profile';
@@ -275,7 +279,18 @@ class Home extends CI_Controller
 		$this->load->view('home/history', $data);
 		$this->load->view('layout/footer');
 	}
-
+	public function delete($id)
+	{
+		$this->db->where(['id  ' => $id]);
+		$query = $this->db->delete('history');
+		if ($query) {
+			$this->session->set_flashdata('flash', 'Di Hapus');
+			redirect('home/history');
+		} else {
+			$this->session->set_flashdata('flash-gagal', 'Di Hapus');
+			redirect('home/history');
+		}
+	}
 	public function detailHistory($id)
 	{
 		$data['title'] = 'SIPerba | History';

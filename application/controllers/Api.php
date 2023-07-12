@@ -15,15 +15,33 @@ class Api extends RestController
 	public function hitung_get()
 	{
 		try {
-			$data = [
-				'b' => $this->get('b'),
-				'd' => $this->get('d'),
-				'as' => $this->get('as'),
-				'fy' => $this->get('fy'),
-				"f'c" => $this->get("fc"),
-				"save" => true
-			];
-
+			$id = $this->get('id');
+			if ($id === null) {
+				$data = [
+					'b' => $this->get('b'),
+					'd' => $this->get('d'),
+					'as' => $this->get('as'),
+					'fy' => $this->get('fy'),
+					"f'c" => $this->get("fc"),
+					"save" => true
+				];
+			} else {
+				if ($this->get('update') === null) {
+					$update = false;
+				} else {
+					$update = true;
+				}
+				$data = [
+					'b' => $this->get('b'),
+					'd' => $this->get('d'),
+					'as' => $this->get('as'),
+					'fy' => $this->get('fy'),
+					"f'c" => $this->get("fc"),
+					"id" => $id,
+					"save" => false,
+					"update" => $update
+				];
+			}
 			$result = $this->M_process->hitungApi($data);
 			return $this->response([
 				'status' => $result['status'],

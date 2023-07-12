@@ -30,26 +30,6 @@ if (flashGagal) {
     )
 }
 
-const pembayaran = $('.pembayaran-berhasil').data('flashdata');
-
-if (pembayaran) {
-    Swal.fire(
-        'Sukses',
-        'Pembayaran Berhasil',
-        'success'
-    )
-}
-
-const pembayaranGagal = $('.pembayaran-gagal').data('flashdata');
-
-if (pembayaranGagal) {
-    Swal.fire(
-        'Gagal',
-        'Pembayaran Gagal',
-        'error'
-    )
-}
-
 
 // tombol-hapus
 $('.tombol-hapus').on('click', function (e) {
