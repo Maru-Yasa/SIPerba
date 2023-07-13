@@ -52,7 +52,6 @@ class M_process extends CI_Model
 				$a = round($T / $C, 2);
 
 				// c = a / beta
-				// var_dump([round($a, 2), $konstantaB]);
 				$c = round($a / $konstantaB, 2);
 
 				// c/dt = c / d
@@ -142,7 +141,7 @@ class M_process extends CI_Model
 				// gagal p < pmin1
 				$hasil = [
 					'status' => false,
-					'data' => 'Balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318',
+					'data' => 'Perbesar Nilai As',
 					'input' => [
 						'stepError' => 1,
 						'pMin1' => $pMin1,
