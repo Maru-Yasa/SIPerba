@@ -190,7 +190,10 @@
 			return `$c = a/β_1 = ${a}/${beta} = ${c}$ inci`
 		}
 
-		function visualBeta(beta) {
+		function visualBeta(beta, fc) {
+			if (4000 < fc && fc <= 8000) {
+				return `$β_1 = 0.85 - 0.05 ((f'c - 4000) / 1000) = 0.85 - 0.05 ((${fc} - 4000) / 1000) = ${beta} $`
+			}
 			return `$β_1 = ${beta}$`
 		}
 
@@ -254,7 +257,7 @@
 								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								${data.input['perbandinganRo']} <br>
-								${visualBeta(data.input['beta'])} <br> 
+								${visualBeta(data.input['beta'], input['fc'])} <br> 
 								${data.input['syaratBeta']} <br> 
 								${visualDt(input['d'])} <br>
 								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
@@ -287,7 +290,7 @@
 								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								${data.input['perbandinganRo']} <br>
-								${visualBeta(data.input['beta'])} <br> 
+								${visualBeta(data.input['beta'], input['fc'])} <br> 
 								${data.input['syaratBeta']} <br> 
 								${visualDt(input['d'])} <br>
 								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
@@ -306,7 +309,7 @@
 							${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 							${data.input['perbandinganRo']} <br>
-							${visualBeta(data.input['beta'])} <br> 
+							${visualBeta(data.input['beta'], input['fc'])} <br> 
 							${data.input['syaratBeta']} <br> 
 							${visualDt(input['d'])} <br>
 							${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>

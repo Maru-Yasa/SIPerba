@@ -32,7 +32,7 @@ class M_process extends CI_Model
 					// jika f'c > 4000 < 8000 = 0,85 - 0,05 (f'c - 4000 / 1000)
 					$konstantaB = round(0.05 * (($input["f'c"] - 4000) / 1000), 2);
 					$konstantaB = round(0.85 - $konstantaB, 2);
-					$syaratBeta = "Dimana $ f'c > 4000 ≤ 8000 $ psi maka $ β = 0,80$";
+					$syaratBeta = "Dimana $ 4000 < ".$input["f'c"]." ≤ 8000 $ psi maka $ β = ".$konstantaB."$";
 				}
 				if ($input["f'c"] > 8000) {
 					// jika f'c > 8000
