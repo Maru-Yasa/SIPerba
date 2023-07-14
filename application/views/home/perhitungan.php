@@ -82,7 +82,7 @@
 					</div>
 					<div class="form-control">
 						<label class="label">
-							<span class="label-text">$(f'c)$ Kekuatan Mutu Beton (psi)</span>
+							<span class="label-text">$(fc')$ Kekuatan Mutu Beton (psi)</span>
 						</label>
 						<input id="fc" type="number" placeholder="" name="kekuatan" class="input input-bordered" />
 					</div>
@@ -175,7 +175,7 @@
 		}
 
 		function visualA(as, fy, fc, b, a) {
-			return `$a = (A_s xx f_y) / (0.85 xx f'c xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci`
+			return `$a = (A_s xx f_y) / (0.85 xx fc' xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci`
 		}
 
 		function visualEt(d, c, et) {
@@ -192,7 +192,7 @@
 
 		function visualBeta(beta, fc) {
 			if (4000 < fc && fc <= 8000) {
-				return `$β_1 = 0.85 - 0.05 ((f'c - 4000) / 1000) = 0.85 - 0.05 ((${fc} - 4000) / 1000) = ${beta} $`
+				return `$β_1 = 0.85 - 0.05 ((fc' - 4000) / 1000) = 0.85 - 0.05 ((${fc} - 4000) / 1000) = ${beta} $`
 			}
 			return `$β_1 = ${beta}$`
 		}
@@ -202,11 +202,11 @@
 		}
 
 		function visualRoMin(pMin, fc, fy) {
-			return `$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}`
+			return `$ρ_min = root(3)(fc')/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}`
 		}
 
 		function visualCBesar(fc, b, a, C) {
-			return `$C = 0.85 xx f'c xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$`
+			return `$C = 0.85 xx fc' xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$`
 		}
 
 		function visualT(T, as, fy) {
@@ -253,7 +253,7 @@
 						hasilSpan.classList.remove('text-error')
 						hasilSpan.classList.add('text-inherit')
 						hasilSpan.innerHTML =
-							`	$f'c = ${input['fc']}$ psi <br>
+							`	$fc' = ${input['fc']}$ psi <br>
 								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								${data.input['perbandinganRo']} <br>
@@ -276,7 +276,7 @@
 						if (data.input.stepError == 1) {
 
 							hasilSpan.innerHTML = `
-								$f'c = ${input['fc']}$ psi <br>
+								$fc' = ${input['fc']}$ psi <br>
 								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								<span class="text-error">${data.data}</span>
@@ -286,7 +286,7 @@
 						if (data.input.stepError == 2) {
 							// c/dt yang error
 							hasilSpan.innerHTML = `
-								$f'c = ${input['fc']}$ psi <br>
+								$fc' = ${input['fc']}$ psi <br>
 								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								${data.input['perbandinganRo']} <br>
@@ -305,7 +305,7 @@
 						if (data.input.stepError == 3) {
 							// et yang error
 							hasilSpan.innerHTML = `
-							$f'c = ${input['fc']}$ psi <br>
+							$fc' = ${input['fc']}$ psi <br>
 							${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 							${data.input['perbandinganRo']} <br>
