@@ -175,7 +175,7 @@
         }
 
         function visualA(as, fy, fc, b, a) {
-            return `$a = (A_s xx f_y) / (0.85 xx f'c xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci`
+            return `$a = (A_s xx f_y) / (0.85 xx fc' xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci`
         }
 
         function visualEt(d, c, et) {
@@ -190,7 +190,10 @@
             return `$c = a/β_1 = ${a}/${beta} = ${c}$ inci`
         }
 
-        function visualBeta(beta) {
+        function visualBeta(beta, fc) {
+            if (4000 < fc && fc <= 8000) {
+                return `$β_1 = 0.85 - 0.05 ((fc' - 4000) / 1000) = 0.85 - 0.05 ((${fc} - 4000) / 1000) = ${beta} $`
+            }
             return `$β_1 = ${beta}$`
         }
 
@@ -199,11 +202,11 @@
         }
 
         function visualRoMin(pMin, fc, fy) {
-            return `$ρ_min = root(3)(f'c)/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}`
+            return `$ρ_min = root(3)(fc')/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}`
         }
 
         function visualCBesar(fc, b, a, C) {
-            return `$C = 0.85 xx f'c xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$`
+            return `$C = 0.85 xx fc' xx b xx a = 0.85 xx ${fc} xx ${b} xx ${a} = ${C}a $ $lb$`
         }
 
         function visualT(T, as, fy) {
@@ -215,8 +218,7 @@
         }
 
         let submitButton = document.getElementById('submit');
-        let hasilSpan = document.getElementById('hasil')
-        let resetButton = document.getElementById('reset')
+        let hasilSpan = document.getElementById('hasil');
 
 
         function hitung(update = false) {
@@ -244,84 +246,87 @@
                         hasilSpan.classList.remove('text-error')
                         hasilSpan.classList.add('text-inherit')
                         hasilSpan.innerHTML =
-                            `$f'c = ${input['fc']}$ psi <br>
-                                ${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
-                                ${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
-                                ${data.input['perbandinganRo']} <br>
-                                ${visualBeta(data.input['beta'])} <br> 
-                                ${data.input['syaratBeta']} <br> 
-                                ${visualDt(input['d'])} <br>
-                                ${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
-                                ${visualT(data.input['T'], input['as'], input['fy'])} <br>
-                                ${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
-                                ${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
-                                ${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
-                                ${data.input['perbandinganCdt']} <br>
-                                ${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
-                                ${data.input['perbandinganEt']} <br>
-                                ${visualMn(input['as'], input['fy'], input['d'], data.input['a'])} <br> 
-                                $M_n=$${data.data} lb-inci (446 kN-m)`;
-                        MathJax.typeset();
+                            `	$fc' = ${input['fc']}$ psi <br>
+								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+								${data.input['perbandinganRo']} <br>
+								${visualBeta(data.input['beta'], input['fc'])} <br> 
+								${data.input['syaratBeta']} <br> 
+								${visualDt(input['d'])} <br>
+								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
+								${visualT(data.input['T'], input['as'], input['fy'])} <br>
+								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
+								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
+								${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
+								${data.input['perbandinganCdt']} <br>
+								${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
+								${data.input['perbandinganEt']} <br>
+								${visualMn(input['as'], input['fy'], input['d'], data.input['a'])} <br> 
+								$M_n=$${data.data} lb-inci (446 kN-m)`
+                        MathJax.typeset()
                     } else {
-                        hasilSpan.classList.add('text-inherit');
+                        hasilSpan.classList.add('text-inherit')
                         if (data.input.stepError == 1) {
+
                             hasilSpan.innerHTML = `
-                                $f'c = ${input['fc']}$ psi <br>
-                                ${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
-                                ${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
-                                <span class="text-error">${data.data}</span>
-                            `;
+								$fc' = ${input['fc']}$ psi <br>
+								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+								<span class="text-error">${data.data}</span>
+							`
                         }
 
                         if (data.input.stepError == 2) {
                             // c/dt yang error
                             hasilSpan.innerHTML = `
-                                $f'c = ${input['fc']}$ psi <br>
-                                ${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
-                                ${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
-                                ${data.input['perbandinganRo']} <br>
-                                ${visualBeta(data.input['beta'])} <br> 
-                                ${data.input['syaratBeta']} <br> 
-                                ${visualDt(input['d'])} <br>
-                                ${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
-                                ${visualT(data.input['T'], input['as'], input['fy'])} <br>
-                                ${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
-                                ${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
-                                ${visualCdt(data.input['c'], input['d'], data.input['cdt'], data.input['terkontrolTekan'])} <br> 
-                                <span class="text-error">${data.data}</span>
-                            `;
+								$fc' = ${input['fc']}$ psi <br>
+								${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+								${data.input['perbandinganRo']} <br>
+								${visualBeta(data.input['beta'], input['fc'])} <br> 
+								${data.input['syaratBeta']} <br> 
+								${visualDt(input['d'])} <br>
+								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
+								${visualT(data.input['T'], input['as'], input['fy'])} <br>
+								${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
+								${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
+								${visualCdt(data.input['c'], input['d'], data.input['cdt'], data.input['terkontrolTekan'])} <br> 
+								<span class="text-error">${data.data}</span>
+							`
                         }
 
                         if (data.input.stepError == 3) {
                             // et yang error
                             hasilSpan.innerHTML = `
-                                $f'c = ${input['fc']}$ psi <br>
-                                ${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
-                                ${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
-                                ${data.input['perbandinganRo']} <br>
-                                ${visualBeta(data.input['beta'])} <br> 
-                                ${data.input['syaratBeta']} <br> 
-                                ${visualDt(input['d'])} <br>
-                                ${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
-                                ${visualT(data.input['T'], input['as'], input['fy'])} <br>
-                                ${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
-                                ${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
-                                ${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
-                                ${data.input['perbandinganCdt']} <br>
-                                ${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
-                                <span class="text-error">${data.data}</span>
-                            `;
+							$fc' = ${input['fc']}$ psi <br>
+							${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
+							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
+							${data.input['perbandinganRo']} <br>
+							${visualBeta(data.input['beta'], input['fc'])} <br> 
+							${data.input['syaratBeta']} <br> 
+							${visualDt(input['d'])} <br>
+							${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
+							${visualT(data.input['T'], input['as'], input['fy'])} <br>
+							${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
+							${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
+							${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
+							${data.input['perbandinganCdt']} <br>
+							${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
+							<span class="text-error">${data.data}</span>
+						`
                         }
                         if (data.input.stepError == 0) {
                             hasilSpan.innerHTML = `
-                            <span class="text-error">${data.data}</span>
-                        `;
+							<span class="text-error">${data.data}</span>
+							`
                         }
 
-                        MathJax.typeset();
+
+
+                        MathJax.typeset()
                     }
-                    endLoading();
-                });
+                    endLoading()
+                })
         }
 
         submitButton.addEventListener('click', () => {
