@@ -7,6 +7,19 @@ class M_process extends CI_Model
 
 		$hasil = [];
 		$syaratBeta = "";
+
+		// ketika Fc' < 2500
+		if ($input["f'c"] <= 2500) {
+			$hasil = [
+				'status' => false,
+				'input' => [
+					'stepError' => 0
+				],
+				'data' => "Untuk fc’ (Mutu Beton) tidak terpenuhi"
+			];
+			return $hasil;
+		}
+
 		try {
 			// 3 * f'c^1/2 / fy
 			$pMin1 = 3 * pow($input["f'c"], 1 / 2) / $input["fy"];
@@ -26,7 +39,7 @@ class M_process extends CI_Model
 				if ($input["f'c"] <= 4000) {
 					// jika f'c <= 4000
 					// $syaratBeta = "Dimana fc' $".$input["f'c"]." ≤ 4000 $ psi maka $ β_1 = 0,85$";
-					$syaratBeta = "Dimana fc' 2500 psi < 3000 psi ≤ 4000 psi";
+					$syaratBeta = "Dimana fc' 2500 psi < ".$input["f'c"]." psi ≤ 4000 psi";
 					$konstantaB = 0.85;
 				}
 				if ($input["f'c"] > 4000 && $input["f'c"] <= 8000) {
