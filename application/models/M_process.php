@@ -25,7 +25,8 @@ class M_process extends CI_Model
 				// penentuan konstanta beta
 				if ($input["f'c"] <= 4000) {
 					// jika f'c <= 4000
-					$syaratBeta = "Dimana fc' $".$input["f'c"]." ≤ 4000 $ psi maka $ β_1 = 0,85$";
+					// $syaratBeta = "Dimana fc' $".$input["f'c"]." ≤ 4000 $ psi maka $ β_1 = 0,85$";
+					$syaratBeta = "Dimana fc' 2500 psi < 3000 psi ≤ 4000 psi";
 					$konstantaB = 0.85;
 				}
 				if ($input["f'c"] > 4000 && $input["f'c"] <= 8000) {
