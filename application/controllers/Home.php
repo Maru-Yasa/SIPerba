@@ -302,7 +302,8 @@ class Home extends CI_Controller
 			'as' => $history['as2'],
 			'fy' => $history['fy'],
 			"f'c" => $history['fc'],
-			"save" => false
+			"save" => false,
+			"update" => false
 		];
 		$rumus = $this->M_process->detailHistory($input);
 		$data['rumus'] = $rumus;

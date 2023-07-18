@@ -9,7 +9,7 @@
     <script src="/assets/dist/tailwind.css"></script>
     <link rel="stylesheet" href="/assets/dist/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>SIPerba | Login</title>
+    <title>SIPerba | Forgot Password</title>
 </head>
 
 <body>
@@ -19,21 +19,15 @@
             <img id="bg" src="/assets/images/construction-bg.jpg" class="h-screen md:w-screen object-cover opacity-40" alt="">
         </div>
         <div class="p-3 bg-base-100 w-80 rounded-lg z-10">
-            <h1 class="text-3xl font-bold text-center w-full"><span class="text-primary">SIPerba</span> Login</h1>
+            <h2 class="text-xl font-bold text-center w-full"><span class="text-primary">SIPerba</span> Forgot Password</h2>
 
             <form action="/auth" method="POST">
                 <?= $this->session->flashdata('message'); ?>
                 <div class="form-control w-full max-w-xs mt-5">
-                    <input type="text" placeholder="Username" name="username" class="input input-bordered w-full max-w-xs" />
-                </div>
-                <div class="form-control w-full max-w-xs mt-3">
-                    <input type="password" placeholder="Password" name="password" class="input input-bordered w-full max-w-xs" />
-                </div>
-                <div class="text-xs text-right text-info mt-3">
-                    <a href="/auth/forgot_password">Forgot Password?</a>
+                    <input type="email" placeholder="Email" name="email" class="input input-bordered w-full max-w-xs" />
                 </div>
                 <div class="form-control w-full mt-3">
-                    <button class="btn btn-primary">Login</button>
+                    <button class="btn btn-primary">Send</button>
                 </div>
             </form>
         </div>

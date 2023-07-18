@@ -56,6 +56,14 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
+    public function forgot_password()
+    {
+        $this->load->view('auth/forgot_password');
+    }
+    public function reset_password()
+    {
+        $this->load->view('auth/reset_password');
+    }
     public function logout()
     {
         $this->session->unset_userdata('user_id');

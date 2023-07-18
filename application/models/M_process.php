@@ -15,7 +15,7 @@ class M_process extends CI_Model
 				'input' => [
 					'stepError' => 0
 				],
-				'data' => "Untuk fc’ (Mutu Beton) tidak terpenuhi"
+				'data' => "Untuk fc’ (Mutu Beton) tidak, maka perbesar fc'"
 			];
 			return $hasil;
 		}
@@ -39,18 +39,18 @@ class M_process extends CI_Model
 				if ($input["f'c"] <= 4000) {
 					// jika f'c <= 4000
 					// $syaratBeta = "Dimana fc' $".$input["f'c"]." ≤ 4000 $ psi maka $ β_1 = 0,85$";
-					$syaratBeta = "Dimana fc' 2500 psi < ".$input["f'c"]." psi ≤ 4000 psi";
+					$syaratBeta = "Dimana fc' 2500 psi < " . $input["f'c"] . " psi ≤ 4000 psi";
 					$konstantaB = 0.85;
 				}
 				if ($input["f'c"] > 4000 && $input["f'c"] <= 8000) {
 					// jika f'c > 4000 < 8000 = 0,85 - 0,05 (f'c - 4000 / 1000)
 					$konstantaB = round(0.05 * (($input["f'c"] - 4000) / 1000), 2);
 					$konstantaB = round(0.85 - $konstantaB, 2);
-					$syaratBeta = "Dimana fc' $ 4000 < ".$input["f'c"]." ≤ 8000 $ psi maka $ β_1 = ".$konstantaB."$";
+					$syaratBeta = "Dimana fc' $ 4000 < " . $input["f'c"] . " ≤ 8000 $ psi maka $ β_1 = " . $konstantaB . "$";
 				}
 				if ($input["f'c"] > 8000) {
 					// jika f'c > 8000
-					$syaratBeta = "Dimana fc' $".$input["f'c"]." > 8000 $ psi maka $ β_1 = 0,65$";
+					$syaratBeta = "Dimana fc' $" . $input["f'c"] . " > 8000 $ psi maka $ β_1 = 0,65$";
 					$konstantaB = 0.65;
 				}
 
@@ -125,10 +125,10 @@ class M_process extends CI_Model
 					}
 				} else {
 					// ketika TIDAK memenuhi syarat c/dt <= 0.375
-					$data = 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini ' . $cdt . ' > 0,375';
+					$data = 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini ' . $cdt . ' ≥ 0,375 , perkecil tulangan tarik As';
 					$terkontrolTekan = false;
 					if ($cdt > 0.60) {
-						$data = 'Syarat atau ketentuan $ c/d_t  ≤ 0,375 = ' . $cdt . ' ≤ 0,375 $ sedangkan disini ' . $cdt . ' > 0,60 yang dimana 0,60 menunjukkan terkontrol tekan, dan juga karenanya balok tersebut tidaklah daktail dan tidak memenuhi Peraturan ACI 318.';
+						$data = 'Syarat atau ketentuan $ c/d_t  ≤ 0,375$ sedangkan disini ' . $cdt . ' ≥ 0,375 , perkecil tulangan tarik As';
 						$terkontrolTekan = true;
 					}
 					$hasil = [
