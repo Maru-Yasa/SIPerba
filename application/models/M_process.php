@@ -1,6 +1,11 @@
 <?php
+// function untuk mengsederhanakan angka
+function _b($x){
+	return round($x * 1000) / 1000;
+}
 class M_process extends CI_Model
 {
+
 
 	public function hitungApi($input)
 	{
@@ -22,7 +27,7 @@ class M_process extends CI_Model
 
 		try {
 			// 3 * f'c^1/2 / fy
-			$pMin1 = 3 * pow($input["f'c"], 1 / 2) / $input["fy"];
+			$pMin1 = _b(3 * pow($input["f'c"], 1 / 2) / $input["fy"]);
 
 			// 200/fy
 			$pMin2 = 200 / $input["fy"];
@@ -69,11 +74,11 @@ class M_process extends CI_Model
 				$c = round($a / $konstantaB, 2);
 
 				// c/dt = c / d
-				$cdt = $c / $input['d'];
+				$cdt = _b($c / $input['d']);
 
 				if ($cdt <= 0.375) {
 					// ketika memenuhi syarat c/dt <= 0.375
-					$et = 0.003 * (($input['d'] - $c) / $c);
+					$et = _b(0.003 * (($input['d'] - $c) / $c));
 					if ($et > 0.005) {
 						// ketika memenuhi syarat et > 0.005
 						// menghitung Mn
@@ -92,9 +97,9 @@ class M_process extends CI_Model
 								'beta' => $konstantaB,
 								'pMin1' => $pMin1,
 								'p' => $p,
-								'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $' . $p . ' > ' . $pMin1 . '$ Diterima',
-								'perbandinganEt' => 'Syarat atau ketentuan $ε_t > 0.005$ = $' . $et . ' > 0.005$ Diterima',
-								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $' . $cdt . ' <= 0.375$ Diterima',
+								'perbandinganRo' => 'Syarat atau ketentuan $ρ > ρ_min$ = $' . _b($p) . ' > ' . $pMin1 . '$ Diterima',
+								'perbandinganEt' => 'Syarat atau ketentuan $ε_t > 0.005$ = $' . _b($et) . ' > 0.005$ Diterima',
+								'perbandinganCdt' => 'Syarat atau ketentuan $c/(d_t) <= 0.375$ = $' . _b($cdt) . ' <= 0.375$ Diterima',
 								'syaratBeta' => $syaratBeta
 
 							]
