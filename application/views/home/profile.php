@@ -16,12 +16,21 @@
                         <span class="label-text">Name</span>
                     </label>
                     <input type="text" placeholder="" name="nama" value="<?= $user['nama'] ?>" class="input input-bordered w-full" />
+                    <?= form_error('nama', '<small class="text-error pl-3">', '</small>') ?>
+                </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Email</span>
+                    </label>
+                    <input type="email" name="email" placeholder="" value="<?= $user['email'] ?>" class="input input-bordered w-full" />
+                    <?= form_error('email', '<small class="text-error pl-3">', '</small>') ?>
                 </div>
                 <div class="form-control w-full">
                     <label class="label">
                         <span class="label-text">Username</span>
                     </label>
                     <input type="text" name="username" placeholder="" value="<?= $user['username'] ?>" class="input input-bordered w-full" />
+                    <?= form_error('username', '<small class="text-error pl-3">', '</small>') ?>
                 </div>
                 <div class="form-control w-32 mt-3">
                     <button class="btn btn-primary" onclick="submitForm()">Simpan</button>
