@@ -33,7 +33,7 @@ class M_process extends CI_Model
 			$pMin2 = 200 / $input["fy"];
 
 			// As / b*d
-			$p = $input["as"] / ($input["b"] * $input["d"]);
+			$p = _b($input["as"] / ($input["b"] * $input["d"]));
 			$Mn = 0;
 
 			if ($p > $pMin1) {
