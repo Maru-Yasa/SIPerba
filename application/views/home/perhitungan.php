@@ -153,6 +153,10 @@
 			});
 		}
 
+		function _b(x){
+			return Math.round(x * 1000) / 1000;
+		}
+
 		function _pembulatan(x) {
 			return +(Math.round(x + "e+2") + "e-2");
 
@@ -175,19 +179,19 @@
 		}
 
 		function visualA(as, fy, fc, b, a) {
-			return `$a = (A_s xx f_y) / (0.85 xx fc' xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${a}$ inci`
+			return `$a = (A_s xx f_y) / (0.85 xx fc' xx b) = (${as} xx ${fy}) / (0.85 xx ${fc} xx ${b}) = ${_b(a)}$ inci`
 		}
 
 		function visualEt(d, c, et) {
-			return `$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${et} > 0.005$`
+			return `$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${_b(et)} > 0.005$`
 		}
 
 		function visualCdt(c, d, cdt, terkontrolTekan = false) {
-			return `$c/d_t = ${c} / ${d} = ${cdt}$ ${terkontrolTekan == true ? '(Terkontrol Tekan)' : ''}`
+			return `$c/d_t = ${c} / ${d} = ${_b(cdt)}$ ${terkontrolTekan == true ? '(Terkontrol Tekan)' : ''}`
 		}
 
 		function visualC(a, beta, c) {
-			return `$c = a/β_1 = ${a}/${beta} = ${c}$ inci`
+			return `$c = a/β_1 = ${a}/${beta} = ${_b(c)}$ inci`
 		}
 
 		function visualBeta(beta, fc) {
@@ -198,11 +202,11 @@
 		}
 
 		function visualRo(p, as, b, d) {
-			return `$ρ = A_s / (b xx d) = ${as} / (${b} xx ${d}) = ${p}$`
+			return `$ρ = A_s / (b xx d) = ${as} / (${b} xx ${d}) = ${_b(p)}$`
 		}
 
 		function visualRoMin(pMin, fc, fy) {
-			return `$ρ_min = root(3)(fc')/(fy) = root(3)(${fc})/${fy}$ = ${(pMin)}`
+			return `$ρ_min = root(3)(fc')/(fy) = root(3)(${fc})/${fy}$ = ${_b(pMin)}`
 		}
 
 		function visualCBesar(fc, b, a, C) {
@@ -269,7 +273,7 @@
 								${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
 								<span class="text-success">${data.input['perbandinganEt']}</span> <br>
 								${visualMn(input['as'], input['fy'], input['d'], data.input['a'])} <br> 
-								$M_n=$${data.data} lb-inci (446 kN-m)`
+								$M_n=$${_b(data.data)} lb-inci (446 kN-m)`
 						MathJax.typeset()
 					} else {
 						hasilSpan.classList.add('text-inherit')
