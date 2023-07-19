@@ -24,6 +24,9 @@ class Home extends CI_Controller
 
 	public function perhitungan()
 	{
+		if ($this->session->userdata('role') == 'admin') {
+			redirect('home');
+		}
 		$this->load->view('home/perhitungan');
 	}
 	public function edit($id)

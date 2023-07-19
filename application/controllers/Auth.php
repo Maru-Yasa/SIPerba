@@ -28,7 +28,7 @@ class Auth extends CI_Controller
                     'role' => $user['role'],
                 ];
                 $this->session->set_userdata($data);
-                if ($user['role'] == 'manager' || 'engineer') {
+                if ($user['role'] !== 'user') {
                     redirect('/');
                 } else {
                     redirect('home/perhitungan');

@@ -1,6 +1,7 @@
 <?php
 // function untuk mengsederhanakan angka
-function _b($x){
+function _b($x)
+{
 	return round($x * 1000) / 1000;
 }
 class M_process extends CI_Model
@@ -246,10 +247,19 @@ class M_process extends CI_Model
 	}
 	public function getUsers()
 	{
-		if ($this->session->userdata('role') == 'engineer') {
-			$result = $this->db->get('users')->result();
+		$userid = $this->session->userdata('user_id');
+		if ($this->session->userdata('role') == 'admin') {
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('id_user !=', $userid);
+			$result = $this->db->get()->result();
+		} elseif ($this->session->userdata('role') == 'engineer') {
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('role !=', 'admin');
+			$this->db->where('id_user !=', $userid);
+			$result = $this->db->get()->result();
 		} elseif ($this->session->userdata('role') == 'manager') {
-			$userid = $this->session->userdata('user_id');
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('role =', 'user');
@@ -277,7 +287,7 @@ class M_process extends CI_Model
 	}
 	public function redirect()
 	{
-		if ($this->session->userdata('role') == 'user') {
+		if ($this->session->userdata('role') === 'user') {
 			$redirect = redirect('/home/perhitungan');
 			return $redirect;
 		}

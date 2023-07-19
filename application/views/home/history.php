@@ -31,7 +31,7 @@ $userid = $this->session->userdata('user_id');
                     <th class="normal-case">Verified by Manager</th>
                     <th class="normal-case">Tanggal</th>
                     <th class="normal-case">Di Edit</th>
-                    <?php if ($rolee !== 'user') { ?>
+                    <?php if ($rolee == 'engineer' || $rolee == 'manager') { ?>
                         <th class="text-center">Konfirmasi</th>
                     <?php } ?>
                     <th class="text-center">Aksi</th>
@@ -75,7 +75,7 @@ $userid = $this->session->userdata('user_id');
                         <?php } else { ?>
                             <td class="text-red-400 text-center"><i class="bi bi-x-circle-fill"></i></td>
                         <?php } ?>
-                        <?php if ($rolee !== 'user') { ?>
+                        <?php if ($rolee == 'engineer' || $rolee == 'manager') { ?>
                             <td class="flex gap-2">
                                 <?php
                                 if ($rolee == 'engineer') {
