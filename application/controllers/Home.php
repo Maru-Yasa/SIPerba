@@ -24,6 +24,9 @@ class Home extends CI_Controller
 
 	public function perhitungan()
 	{
+		if ($this->session->userdata('role') == 'admin') {
+			redirect('home');
+		}
 		$this->load->view('home/perhitungan');
 	}
 	public function edit($id)
@@ -46,10 +49,16 @@ class Home extends CI_Controller
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$user = $this->db->get_where('users', ['id_user' => $id])->row_array();
 		$new_username = htmlspecialchars($this->input->post('username'));
+		$new_email = htmlspecialchars($this->input->post('email'));
 		if ($new_username == $user['username']) {
 			$this->form_validation->set_rules('username', 'Username', 'required|trim');
 		} else {
 			$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.username]', ['is_unique' => 'This username has already registered!']);
+		}
+		if ($new_email == $user['email']) {
+			$this->form_validation->set_rules('email', 'Email', 'required|trim');
+		} else {
+			$this->form_validation->set_rules('email', 'Email', 'required|trim|is_unique[users.email]', ['is_unique' => 'This email has already registered!']);
 		}
 		if ($this->form_validation->run() == false) {
 			$this->session->set_flashdata('flash-gagal', 'Di Update!!');
@@ -58,6 +67,7 @@ class Home extends CI_Controller
 			$data = [
 				'nama' => htmlspecialchars($this->input->post('nama')),
 				'username' => htmlspecialchars($this->input->post('username')),
+				'email' => htmlspecialchars($this->input->post('email')),
 			];
 			$where = [
 				'id_user' => $id
@@ -278,18 +288,6 @@ class Home extends CI_Controller
 		$this->load->view('layout/header', $data);
 		$this->load->view('home/history', $data);
 		$this->load->view('layout/footer');
-	}
-	public function delete($id)
-	{
-		$this->db->where(['id  ' => $id]);
-		$query = $this->db->delete('history');
-		if ($query) {
-			$this->session->set_flashdata('flash', 'Di Hapus');
-			redirect('home/history');
-		} else {
-			$this->session->set_flashdata('flash-gagal', 'Di Hapus');
-			redirect('home/history');
-		}
 	}
 	public function detailHistory($id)
 	{

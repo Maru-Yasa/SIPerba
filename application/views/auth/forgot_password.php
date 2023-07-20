@@ -21,7 +21,7 @@
         <div class="p-3 bg-base-100 w-80 rounded-lg z-10">
             <h2 class="text-xl font-bold text-center w-full"><span class="text-primary">SIPerba</span> Forgot Password</h2>
 
-            <form action="/auth" method="POST">
+            <form action="/auth/forgot_password" method="POST">
                 <?= $this->session->flashdata('message'); ?>
                 <div class="form-control w-full max-w-xs mt-5">
                     <input type="email" placeholder="Email" name="email" class="input input-bordered w-full max-w-xs" />

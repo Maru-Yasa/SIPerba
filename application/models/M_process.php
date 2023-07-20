@@ -1,6 +1,7 @@
 <?php
 // function untuk mengsederhanakan angka
-function _b($x){
+function _b($x)
+{
 	return round($x * 1000) / 1000;
 }
 class M_process extends CI_Model
@@ -212,25 +213,9 @@ class M_process extends CI_Model
 				];
 				// return $hasil;
 			}
-			if ($Mn == 0) {
-				$Mn = "-";
-			}
-			date_default_timezone_set('Asia/Jakarta');
-			$userid = $this->session->userdata('user_id');
-			$data = [
-				'b' => $input["b"],
-				'd' => $input["d"],
-				'as2' => $input['as'],
-				'fy' => $input['fy'],
-				'fc' => $input["f'c"],
-				'hasil' => $Mn,
-				'id_user' => $userid,
-				'date' => date("Y-m-d H:i:s")
-			];
-			if ($input['save'] == true) {
-				$this->db->insert('history', $data);
-			} elseif ($input['update'] == true) {
-				$id2 = $input['id'];
+			if ($Mn !== 0) {
+				date_default_timezone_set('Asia/Jakarta');
+				$userid = $this->session->userdata('user_id');
 				$data = [
 					'b' => $input["b"],
 					'd' => $input["d"],
@@ -238,14 +223,29 @@ class M_process extends CI_Model
 					'fy' => $input['fy'],
 					'fc' => $input["f'c"],
 					'hasil' => $Mn,
-					'is_verified_by_manager' => null,
-					'is_verified_by_engineer' => null,
-					'diedit' => 1,
 					'id_user' => $userid,
 					'date' => date("Y-m-d H:i:s")
 				];
-				$this->db->where('id', $id2);
-				$this->db->update('history', $data);
+				if ($input['save'] == true) {
+					$this->db->insert('history', $data);
+				} elseif ($input['update'] == true) {
+					$id2 = $input['id'];
+					$data = [
+						'b' => $input["b"],
+						'd' => $input["d"],
+						'as2' => $input['as'],
+						'fy' => $input['fy'],
+						'fc' => $input["f'c"],
+						'hasil' => $Mn,
+						'is_verified_by_manager' => null,
+						'is_verified_by_engineer' => null,
+						'diedit' => 1,
+						'id_user' => $userid,
+						'date' => date("Y-m-d H:i:s")
+					];
+					$this->db->where('id', $id2);
+					$this->db->update('history', $data);
+				}
 			}
 		} catch (\Throwable $th) {
 			$hasil = [
@@ -290,10 +290,19 @@ class M_process extends CI_Model
 	}
 	public function getUsers()
 	{
-		if ($this->session->userdata('role') == 'engineer') {
-			$result = $this->db->get('users')->result();
+		$userid = $this->session->userdata('user_id');
+		if ($this->session->userdata('role') == 'admin') {
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('id_user !=', $userid);
+			$result = $this->db->get()->result();
+		} elseif ($this->session->userdata('role') == 'engineer') {
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('role !=', 'admin');
+			$this->db->where('id_user !=', $userid);
+			$result = $this->db->get()->result();
 		} elseif ($this->session->userdata('role') == 'manager') {
-			$userid = $this->session->userdata('user_id');
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('role =', 'user');
@@ -321,9 +330,24 @@ class M_process extends CI_Model
 	}
 	public function redirect()
 	{
-		if ($this->session->userdata('role') == 'user') {
+		if ($this->session->userdata('role') === 'user') {
 			$redirect = redirect('/home/perhitungan');
 			return $redirect;
+		}
+	}
+	public function sendEmail($to, $token)
+	{
+		// Pengaturan email
+		$this->email->from('admin@perhitunganlrfd.site', 'Admin Perhitungan LRFD');
+		$this->email->to($to);
+		$this->email->subject('Reset Password');
+		$this->email->message('Link reset password : https://revisi.perhitunganlrfd.site/auth/reset_password/' . $token);
+
+		// Mengirim email
+		if ($this->email->send()) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

@@ -18,7 +18,12 @@
     <div class="mt-5 w-full h-64 shadow rounded-lg p-3 flex flex-col items-center justify-center bg-primary relative overflow-hidden group">
         <h1 class="text-3xl font-bold text-white z-10">Wellcome to <span class="">SIPerba</span></h1>
         <div class="flex flex-col md:flex-row gap-2 mt-3 z-10">
-            <a href="/home/perhitungan" class="btn btn-ghost bg-white text-black border-0 hover:bg-slate-200 gap-2"><i class="bi bi-calculator-fill"></i> Mulai Menghitung</a>
+            <?php
+            $role = $this->session->userdata('role');
+            if ($role !== 'admin') {
+            ?>
+                <a href="/home/perhitungan" class="btn btn-ghost bg-white text-black border-0 hover:bg-slate-200 gap-2"><i class="bi bi-calculator-fill"></i> Mulai Menghitung</a>
+            <?php } ?>
             <a href="/home/history" class="btn btn-accent gap-2"><i class="bi bi-clock-history"></i> Lihat Histori</a>
         </div>
         <div class="absolute left-1 -buttom-5 opacity-40 group-hover:blur-sm ease-in duration-300 z-0">

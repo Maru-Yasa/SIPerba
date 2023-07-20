@@ -532,3 +532,13 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['protocol'] = 'smtp';
+$config['smtp_host'] = 'mail.id3.icu';
+$config['smtp_user'] = 'admin@id3.icu';
+$config['smtp_pass'] = 'Heru.kris30';
+$config['smtp_port'] = 465;
+$config['smtp_crypto'] = 'ssl';
+$config['mailtype'] = 'html';
+$config['charset'] = 'utf-8';
+$config['newline'] = "\r\n";

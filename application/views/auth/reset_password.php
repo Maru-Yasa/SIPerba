@@ -21,7 +21,7 @@
         <div class="p-3 bg-base-100 w-80 rounded-lg z-10">
             <h1 class="text-xl font-bold text-center w-full"><span class="text-primary">SIPerba</span> Reset Password</h1>
 
-            <form action="/auth" method="POST">
+            <form action="/auth/reset_password/<?= $token ?>" method="POST">
                 <?= $this->session->flashdata('message'); ?>
                 <div class="form-control w-full max-w-xs mt-3">
                     <input type="password" placeholder="New Password" name="password1" class="input input-bordered w-full max-w-xs" />
