@@ -90,7 +90,7 @@
 						<label class="label">
 							<span class="label-text">$(F_y)$ Mutu Baja (psi)</span>
 						</label>
-						<input id="fy" type="number" placeholder="" name="mutu" class="input input-bordered" />
+						<input id="fy" type="number" placeholder="" name="mutu" value="60000" class="input input-bordered" />
 
 					</div>
 					<!-- Input awal end -->
@@ -327,9 +327,19 @@
 						`
 						}
 						if (data.input.stepError == 0) {
-							hasilSpan.innerHTML = `
-							<span class="text-error">${data.data}</span>
-							`
+							if (typeof data.data == "object") {
+								let spans = [];
+								data.data.forEach(e => {
+									spans.push(`
+										<span class="text-error">${e}</span>
+									`)
+								});
+								hasilSpan.innerHTML = spans.join("<br>")
+							}else{
+								hasilSpan.innerHTML = `
+								<span class="text-error">${data.data}</span>
+								`
+							}
 						}
 
 

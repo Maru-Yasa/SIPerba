@@ -6,6 +6,41 @@ function _b($x){
 class M_process extends CI_Model
 {
 
+	private function between($x, $y, $val)
+	{
+		return $val >= $x && $val <= $y;
+	}
+
+	private function inputLimitValidation($input)
+	{
+		$limitError = [];
+		// b min 10 inci max 80 inci
+		if (!$this->between(10, 80, $input['b'])) {
+			$limitError[] = "Masukan b antara 10-80 inci";
+		}
+
+		// d min 20 max 160
+		if (!$this->between(20, 160, $input["d"])) {
+			$limitError[] = "Masukan d antara 20-160 inci";
+		}
+
+		// As min 0,5 max 320
+		if (!$this->between(0.5, 320, $input["as"])) {
+			$limitError[] = "Masukan As antara 0.5-320 inci";
+		}
+
+		// fc' min 2500 max 8000
+		if (!$this->between(2500, 8000, $input["f'c"])) {
+			$limitError[] = "Masukan fc' antara 2500-8000 psi";
+		}
+
+		// fy = 60000
+		if ($input["fy"] != 60000) {
+			$limitError[] = "Masukan fy 60000 psi";
+		}
+
+		return $limitError;
+	}
 
 	public function hitungApi($input)
 	{
@@ -13,17 +48,29 @@ class M_process extends CI_Model
 		$hasil = [];
 		$syaratBeta = "";
 
-		// ketika Fc' < 2500
-		if ($input["f'c"] <= 2500) {
+		// limit validation
+		if (count($this->inputLimitValidation($input)) > 0) {
 			$hasil = [
 				'status' => false,
 				'input' => [
 					'stepError' => 0
 				],
-				'data' => "Untuk fc’ (Mutu Beton) tidak, maka perbesar fc'"
+				'data' => $this->inputLimitValidation($input)
 			];
 			return $hasil;
 		}
+
+		// // ketika Fc' < 2500
+		// if ($input["f'c"] <= 2500) {
+		// 	$hasil = [
+		// 		'status' => false,
+		// 		'input' => [
+		// 			'stepError' => 0
+		// 		],
+		// 		'data' => "Untuk fc’ (Mutu Beton) tidak dektail, maka perbesar fc'"
+		// 	];
+		// 	return $hasil;
+		// }
 
 		try {
 			// 3 * f'c^1/2 / fy
@@ -41,8 +88,8 @@ class M_process extends CI_Model
 				$konstantaB = 0;
 
 				// penentuan konstanta beta
-				if ($input["f'c"] <= 4000) {
-					// jika f'c <= 4000
+				if ($input["f'c"] <= 4000 && $input["f'c"] >= 2500) {
+					// jika f'c <= 4000 dan fc' >= 2500
 					// $syaratBeta = "Dimana fc' $".$input["f'c"]." ≤ 4000 $ psi maka $ β_1 = 0,85$";
 					$syaratBeta = "Dimana fc' 2500 psi < " . $input["f'c"] . " psi ≤ 4000 psi";
 					$konstantaB = 0.85;
@@ -130,12 +177,8 @@ class M_process extends CI_Model
 					}
 				} else {
 					// ketika TIDAK memenuhi syarat c/dt <= 0.375
-					$data = 'Syarat atau ketentuan $c/(d_t) ≤ 0,375$ sedangkan disini ' . $cdt . ' ≥ 0,375 , perkecil tulangan tarik As';
+					$data = 'Penampang tidak memenuhi $c/(d_t) ≤ 0,375$ perkecil tulangan tarik As';
 					$terkontrolTekan = false;
-					if ($cdt > 0.60) {
-						$data = 'Syarat atau ketentuan $ c/d_t  ≤ 0,375$ sedangkan disini ' . $cdt . ' ≥ 0,375 , perkecil tulangan tarik As';
-						$terkontrolTekan = true;
-					}
 					$hasil = [
 						'status' => false,
 						'data' => $data,
