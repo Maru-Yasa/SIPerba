@@ -156,7 +156,7 @@ class M_process extends CI_Model
 						// ketika TIDAK memenuhi syarat et > 0.005
 						$hasil = [
 							'status' => false,
-							'data' => 'Syarat atau ketentuan $e_t > 0.005$ sedangkan disini $' . $et . ' < 0.005$',
+							'data' => 'Syarat atau ketentuan $e_t > 0.005$ sedangkan disini $' . $et . ' < 0.005$ perkecil tulangan tarik As',
 							'input' => [
 								'stepError' => 3,
 								'a' => $a,
