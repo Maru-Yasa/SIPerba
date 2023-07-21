@@ -15,7 +15,10 @@ class Home extends CI_Controller
 		$this->M_process->redirect();
 		$data['title'] = 'SIPerba | Dashboard';
 		$data['user'] = $this->db->get_where('users', ['id_user' => $this->session->userdata('user_id')])->row_array();
-		$data['countU'] = $this->M_process->countUser();
+		$data['countUs'] = $this->M_process->countUsers();
+		$data['countU'] = $this->M_process->countUsers();
+		$data['countM'] = $this->M_process->countManager();
+		$data['countE'] = $this->M_process->countEngineer();
 		$data['countH'] = $this->M_process->countHistory();
 		$this->load->view('layout/header', $data);
 		$this->load->view('home/index', $data);
@@ -283,6 +286,9 @@ class Home extends CI_Controller
 
 	public function history()
 	{
+		if ($this->session->userdata('role') == 'admin') {
+			redirect('home');
+		}
 		$data['title'] = 'SIPerba | History';
 		$data['riwayat'] = $this->M_process->getHistory();
 		$this->load->view('layout/header', $data);

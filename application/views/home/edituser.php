@@ -57,9 +57,11 @@
                 </label>
                 <select class="select select-bordered w-full" name="role" id="">
                     <option selected value="<?= $user['role'] ?>"><?= $user['role'] ?></option>
-                    <?php if ($this->session->userdata('role') == 'engineer') { ?>
+                    <?php if ($this->session->userdata('role') == 'admin') { ?>
                         <option value="engineer">engineer</option>
                         <option value="manager">manager</option>
+                    <?php } elseif ($this->session->userdata('role') == 'manager') { ?>
+                        <option value="engineer">engineer</option>
                     <?php } ?>
                     <option value="user">user</option>
                 </select>

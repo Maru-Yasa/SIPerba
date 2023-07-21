@@ -276,7 +276,7 @@ class M_process extends CI_Model
 		return $query;
 	}
 
-	public function countUser()
+	public function countUsers()
 	{
 		$this->db->from('users');
 		$count = $this->db->count_all_results();
@@ -288,6 +288,27 @@ class M_process extends CI_Model
 		$count = $this->db->count_all_results();
 		return $count;
 	}
+	public function countManager()
+	{
+		$this->db->where('role', 'manager');
+		$this->db->from('users');
+		$count = $this->db->count_all_results();
+		return $count;
+	}
+	public function countEngineer()
+	{
+		$this->db->where('role', 'engineer');
+		$this->db->from('users');
+		$count = $this->db->count_all_results();
+		return $count;
+	}
+	public function countUser()
+	{
+		$this->db->where('role', 'user');
+		$this->db->from('users');
+		$count = $this->db->count_all_results();
+		return $count;
+	}
 	public function getUsers()
 	{
 		$userid = $this->session->userdata('user_id');
@@ -296,13 +317,14 @@ class M_process extends CI_Model
 			$this->db->from('users');
 			$this->db->where('id_user !=', $userid);
 			$result = $this->db->get()->result();
-		} elseif ($this->session->userdata('role') == 'engineer') {
+		} elseif ($this->session->userdata('role') == 'manager') {
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('role !=', 'admin');
-			$this->db->where('id_user !=', $userid);
+			$this->db->where('role !=', 'manager');
+			// $this->db->where('id_user !=', $userid);
 			$result = $this->db->get()->result();
-		} elseif ($this->session->userdata('role') == 'manager') {
+		} elseif ($this->session->userdata('role') == 'engineer') {
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('role =', 'user');
