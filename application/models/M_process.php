@@ -321,7 +321,8 @@ class M_process extends CI_Model
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('role !=', 'admin');
-			$this->db->where('id_user !=', $userid);
+			$this->db->where('role !=', 'manager');
+			// $this->db->where('id_user !=', $userid);
 			$result = $this->db->get()->result();
 		} elseif ($this->session->userdata('role') == 'engineer') {
 			$this->db->select('*');

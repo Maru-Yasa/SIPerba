@@ -153,7 +153,7 @@
 			});
 		}
 
-		function _b(x){
+		function _b(x) {
 			return Math.round(x * 1000) / 1000;
 		}
 
@@ -335,7 +335,7 @@
 									`)
 								});
 								hasilSpan.innerHTML = spans.join("<br>")
-							}else{
+							} else {
 								hasilSpan.innerHTML = `
 								<span class="text-error">${data.data}</span>
 								`

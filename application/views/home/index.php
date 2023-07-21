@@ -43,11 +43,12 @@
         <div class="flex flex-col md:flex-row gap-2 mt-3 z-10">
             <?php
             $role = $this->session->userdata('role');
-            if ($role !== 'admin') {
+            if ($role == 'admin') {
             ?>
+                <a href="/home/users" class="btn btn-accent gap-2"><i class="bi bi-people"></i> Kelola User</a>
+            <?php } else { ?>
                 <a href="/home/perhitungan" class="btn btn-ghost bg-white text-black border-0 hover:bg-slate-200 gap-2"><i class="bi bi-calculator-fill"></i> Mulai Menghitung</a>
             <?php } ?>
-            <a href="/home/users" class="btn btn-accent gap-2"><i class="bi bi-people"></i> Kelola User</a>
         </div>
         <div class="absolute left-1 -buttom-5 opacity-40 group-hover:blur-sm ease-in duration-300 z-0">
             <img src="/assets/images/undraw_mathematics_-4-otb.svg" width="200" alt="">
