@@ -262,7 +262,7 @@
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								<span class="text-success">${data.input['perbandinganRo']}</span><br>
 								${visualBeta(data.input['beta'], input['fc'])} <br> 
-								${data.input['syaratBeta']} <br> 
+								<span class="text-success">${data.input['syaratBeta']}</span> <br> 
 								${visualDt(input['d'])} <br>
 								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
 								${visualT(data.input['T'], input['as'], input['fy'])} <br>
@@ -295,7 +295,7 @@
 								${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 								<span class="text-success">${data.input['perbandinganRo']} </span> <br>
 								${visualBeta(data.input['beta'], input['fc'])} <br> 
-								${data.input['syaratBeta']} <br> 
+								<span class="text-success">${data.input['syaratBeta']}</span> <br> 
 								${visualDt(input['d'])} <br>
 								${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
 								${visualT(data.input['T'], input['as'], input['fy'])} <br>
@@ -314,7 +314,7 @@
 							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
 							${data.input['perbandinganRo']} <br>
 							${visualBeta(data.input['beta'], input['fc'])} <br> 
-							${data.input['syaratBeta']} <br> 
+							<span class="text-success">${data.input['syaratBeta']}</span> <br> 
 							${visualDt(input['d'])} <br>
 							${visualCBesar(input['fc'], input['b'], 'a', data.input['C'])} <br>
 							${visualT(data.input['T'], input['as'], input['fy'])} <br>

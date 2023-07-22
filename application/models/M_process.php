@@ -21,8 +21,8 @@ class M_process extends CI_Model
 		}
 
 		// d min 20 max 160
-		if (!$this->between(20, 160, $input["d"])) {
-			$limitError[] = "Masukan d antara 20-160 inci";
+		if (!$this->between(10, 160, $input["d"])) {
+			$limitError[] = "Masukan d antara 10-160 inci";
 		}
 
 		// As min 0,5 max 320
@@ -92,18 +92,18 @@ class M_process extends CI_Model
 				if ($input["f'c"] <= 4000 && $input["f'c"] >= 2500) {
 					// jika f'c <= 4000 dan fc' >= 2500
 					// $syaratBeta = "Dimana fc' $".$input["f'c"]." ≤ 4000 $ psi maka $ β_1 = 0,85$";
-					$syaratBeta = "Dimana fc' 2500 psi < " . $input["f'c"] . " psi ≤ 4000 psi";
+					$syaratBeta = "Dimana 2500 psi $<$" . " fc' " . " psi ≤ 4000 psi maka $ β_1 = 0,85$";
 					$konstantaB = 0.85;
 				}
 				if ($input["f'c"] > 4000 && $input["f'c"] <= 8000) {
 					// jika f'c > 4000 < 8000 = 0,85 - 0,05 (f'c - 4000 / 1000)
 					$konstantaB = round(0.05 * (($input["f'c"] - 4000) / 1000), 2);
 					$konstantaB = round(0.85 - $konstantaB, 2);
-					$syaratBeta = "Dimana fc' $ 4000 < " . $input["f'c"] . " ≤ 8000 $ psi maka $ β_1 = " . $konstantaB . "$";
+					$syaratBeta = "Dimana 4000 psi $<$" . " fc' " . "$ ≤ 8000 $ psi maka $ β_1 = " . $konstantaB . "$";
 				}
 				if ($input["f'c"] > 8000) {
 					// jika f'c > 8000
-					$syaratBeta = "Dimana fc' $" . $input["f'c"] . " > 8000 $ psi maka $ β_1 = 0,65$";
+					$syaratBeta = "Dimana 8000 psi $<$" . " fc' " . " > 8000 $ psi maka $ β_1 = 0,65$";
 					$konstantaB = 0.65;
 				}
 
