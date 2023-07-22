@@ -92,7 +92,7 @@ class M_process extends CI_Model
 				if ($input["f'c"] <= 4000 && $input["f'c"] >= 2500) {
 					// jika f'c <= 4000 dan fc' >= 2500
 					// $syaratBeta = "Dimana fc' $".$input["f'c"]." ≤ 4000 $ psi maka $ β_1 = 0,85$";
-					$syaratBeta = "Dimana 2500 psi $<$" . " fc' " . " psi ≤ 4000 psi maka $ β_1 = 0,85$";
+					$syaratBeta = "Dimana 2500 psi $<$" . " fc' " . " ≤ 4000 psi maka $ β_1 = 0,85$";
 					$konstantaB = 0.85;
 				}
 				if ($input["f'c"] > 4000 && $input["f'c"] <= 8000) {
@@ -156,7 +156,7 @@ class M_process extends CI_Model
 						// ketika TIDAK memenuhi syarat et > 0.005
 						$hasil = [
 							'status' => false,
-							'data' => 'Syarat atau ketentuan $e_t > 0.005$ sedangkan disini $' . $et . ' < 0.005$ perkecil tulangan tarik As',
+							'data' => 'Penampang tidak memenuhi, Maka perkecil tulangan tarik As',
 							'input' => [
 								'stepError' => 3,
 								'a' => $a,

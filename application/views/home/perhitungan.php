@@ -183,7 +183,7 @@
 		}
 
 		function visualEt(d, c, et) {
-			return `$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) = ${_b(et)} > 0.005$`
+			return `$ε_t = 0,003((d_t-c) / c)$ <br> $ε_t = 0,003((${d}-${c}) / ${c}) $`
 		}
 
 		function visualCdt(c, d, cdt, terkontrolTekan = false) {
