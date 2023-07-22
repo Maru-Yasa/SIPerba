@@ -312,7 +312,7 @@
 							$fc' = ${input['fc']}$ psi <br>
 							${visualRoMin(data.input['pMin1'], input['fc'], input['fy'])} <br>
 							${visualRo(data.input['p'], input['as'], input['b'], input['d'])} <br>
-							${data.input['perbandinganRo']} <br>
+							<span class="text-success">${data.input['perbandinganRo']}</span><br>
 							${visualBeta(data.input['beta'], input['fc'])} <br> 
 							<span class="text-success">${data.input['syaratBeta']}</span> <br> 
 							${visualDt(input['d'])} <br>
@@ -321,7 +321,7 @@
 							${visualA(input['as'], input['fy'], input['fc'], input['b'], data.input['a'])} <br> 
 							${visualC(data.input['a'], data.input['beta'], data.input['c'])} <br> 
 							${visualCdt(data.input['c'], input['d'], data.input['cdt'])} <br> 
-							${data.input['perbandinganCdt']} <br>
+							<span class="text-success">${data.input['perbandinganCdt']}</span> <br> 
 							${visualEt(input['d'], data.input['c'], data.input['et'])} <br>
 							<span class="text-error">${data.data}</span>
 						`
